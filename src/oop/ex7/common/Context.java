@@ -14,6 +14,7 @@ import java.util.Stack;
 public class Context {
 	private Stack< Variable > stack;
 	private LineNumberReader reader;
+
 	
 	/**
 	 * 

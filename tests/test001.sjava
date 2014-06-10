@@ -1,0 +1,9 @@
+int a;
+
+int goo(int h, int i) {
+
+	int j = a;
+
+	return j;
+
+}

@@ -3,7 +3,7 @@
  */
 package oop.ex7.validator;
 
-import oop.ex7.common.Validator;
+import oop.ex7.common.CommandValidator;
 
 
 /**
@@ -28,7 +28,7 @@ public class ValidatorFactory {
 		return instance;
 	}
 	
-	public Validator create(String expression){
+	public CommandValidator create(String expression){
 		return null;
 	}
 }
