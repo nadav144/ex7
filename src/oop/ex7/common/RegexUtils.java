@@ -1,7 +1,5 @@
 package oop.ex7.common;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,8 @@ public class RegexUtils {
 
     public static List<MatchResult> Match(String pattern, String content){
         List<MatchResult> returnValue = new ArrayList<MatchResult>();
-        Pattern regex =  Pattern.compile(pattern);
+        Pattern regex =  Pattern.compile(pattern, Pattern.MULTILINE);
+
         Matcher matcher = regex.matcher(content);
         while (matcher.find()){
             returnValue.add(matcher.toMatchResult());

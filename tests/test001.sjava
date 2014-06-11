@@ -1,6 +1,12 @@
-int a;
+int a = 5;
+int goo() {
 
-int goo(int h, int i) {
+	int j = a;
+
+	return j;
+
+}
+int goo2(int test) {
 
 	int j = a;
 

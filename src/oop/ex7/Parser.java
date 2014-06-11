@@ -57,7 +57,7 @@ public class Parser {
                 if (line.length() > 0){
                     Matcher m = p.matcher(line);
                     if (m.matches())
-                        builder.append(line + "\n");
+                        builder.append(line + "\r\n");
                     else
                         throw new Exception("Syntax Error");
                 }
@@ -74,7 +74,11 @@ public class Parser {
 
         // Search for method declerations
 
-        List<MatchResult> results = RegexUtils.Match("^\\s*(\\w*)(\\[\\])?\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{", content);
+        List<MatchResult> results = RegexUtils.Match("^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{", content);
+        String test = "";
+        for (MatchResult res : results){
+            test += res.group(0) + "\r\n";
+        }
 
 
 
