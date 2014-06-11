@@ -37,6 +37,12 @@ public class RegexUtils {
 		}
 
         return returnValue;
+    }
+
+    public static MatchResult MatchSignle(String pattern, String content){
+        Pattern regex =  Pattern.compile(pattern, Pattern.MULTILINE);
+        Matcher matcher = regex.matcher(content);
+        return matcher.toMatchResult();
 
     }
 }
