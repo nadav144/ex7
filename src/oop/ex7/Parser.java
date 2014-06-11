@@ -1,6 +1,6 @@
 package oop.ex7;
 
-import oop.ex7.commands.CommandFactory;
+
 import oop.ex7.common.*;
 
 import java.io.LineNumberReader;
@@ -105,14 +105,14 @@ public class Parser {
         while (line != null){
 
             // Generate the right command for this line.
-            Command command = CommandFactory.CreateCommand(line);
+            Command command = null;//CommandFactory.CreateCommand(line);
             //if (!command.Validate)
             //  return False
             // if this is a new scope, parse the scope
 
             if (command.isScope()){
                 Scope commandScope = new Scope();
-                returnValue.Append(ParseScope(reader, scope));
+                returnValue.append(ParseScope(reader, scope));
             }
 
 

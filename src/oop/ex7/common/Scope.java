@@ -9,13 +9,13 @@ import java.util.List;
 public class Scope {
 
     private List<Scope> subScopes;
-    private List<Variable> vars;
+    private List<VariableDeclaration> vars;
 
     private Scope parentScope;
 
     public Scope(){
         subScopes = new ArrayList<Scope>();
-        vars = new ArrayList<Variable>();
+        vars = new ArrayList<VariableDeclaration>();
     }
 
     public MainScope getMainScope(){

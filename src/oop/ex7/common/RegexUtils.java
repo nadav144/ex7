@@ -24,4 +24,19 @@ public class RegexUtils {
         return returnValue;
 
     }
+    
+    public static List<MatchResult> Match(String pattern, String[] content){
+        List<MatchResult> returnValue = new ArrayList<MatchResult>();
+        Pattern regex =  Pattern.compile(pattern, Pattern.MULTILINE);
+        
+        for ( String string : content ) {
+        	Matcher matcher = regex.matcher(string);
+            while (matcher.find()){
+                returnValue.add(matcher.toMatchResult());
+            }
+		}
+
+        return returnValue;
+
+    }
 }
