@@ -9,7 +9,7 @@ import java.util.regex.MatchResult;
 public class MethodDeclaration implements Command {
 	
 	private static final String PARAM_PATTERN = "\\s*(\\w*)\\s*(\\w*)\\s*";
-	private LinkedList< VariableDeclaration > params;
+	private LinkedList< Variable > params;
 	private ReturnType returnType;
 	private String[] declaration;
 	
@@ -23,7 +23,7 @@ public class MethodDeclaration implements Command {
 		
 		returnType = ReturnType.parse( this.declaration[0] );
 		
-		this.params = new LinkedList< VariableDeclaration >();
+		this.params = new LinkedList< Variable >();
 		
 		// TODO: params.length should equal to matchResults.length
 		// not sure how to do this, other than save the number for later
@@ -32,7 +32,7 @@ public class MethodDeclaration implements Command {
 				RegexUtils.Match( PARAM_PATTERN, params );
 		for ( MatchResult result : matchResults ) {
 			
-			this.params.add( new VariableDeclaration( result ) );
+			this.params.add( new Variable( result ) );
 		}
 		
 	}
@@ -40,7 +40,7 @@ public class MethodDeclaration implements Command {
 	/**
 	 * @return the params
 	 */
-	public LinkedList< VariableDeclaration > getParams() {
+	public LinkedList< Variable > getParams() {
 		return params;
 	}
 	
@@ -78,7 +78,7 @@ public class MethodDeclaration implements Command {
 		}
 		
 		// TODO: check length of params
-		for ( VariableDeclaration param : getParams() ) {
+		for ( Variable param : getParams() ) {
 			result.append( param.isValid(expression,scope) );
 		}
 		

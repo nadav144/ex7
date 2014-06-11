@@ -12,7 +12,7 @@ import java.util.Stack;
  *
  */
 public class Context {
-	private Stack< VariableDeclaration > stack;
+	private Stack< Variable > stack;
 	private LineNumberReader reader;
 
 	
@@ -28,7 +28,7 @@ public class Context {
 	/**
 	 * @return the stack
 	 */
-	public Stack< VariableDeclaration > getStack() {
+	public Stack< Variable > getStack() {
 		return stack;
 	}
 

@@ -11,7 +11,7 @@ import oop.ex7.ValidationResult;
  * @author Jirsch
  * 
  */
-public class VariableDeclaration implements Command {
+public class Variable implements Command {
 	
 	private VarType type;
 	private boolean isArray;
@@ -19,10 +19,18 @@ public class VariableDeclaration implements Command {
 	private boolean inited;
 	private int lineDeclared;
 	
-	public VariableDeclaration(MatchResult declaration){
-		// int a;
-		// int a=5 \ a=b \ a= foo() \ a= 5+foo()
-		// int[] a={}
+	public Variable(MatchResult declaration){
+		// int a
+		// int[] a
+		
+		String type=declaration.group(1) ;
+		if (type.endsWith( "[]" )){
+			type=type.substring( 0, type.length()-2 );
+			isArray=true;
+		}
+		
+		this.type=VarType.parse( );
+		name=declaration.group(2);
 		
 	}
 	
@@ -39,8 +47,8 @@ public class VariableDeclaration implements Command {
 		if ( arg0 instanceof String ) {
 			return getName().equals( arg0 );
 		}
-		if ( arg0 instanceof VariableDeclaration ) {
-			return getName().equals( ( (VariableDeclaration) arg0 ).getName() );
+		if ( arg0 instanceof Variable ) {
+			return getName().equals( ( (Variable) arg0 ).getName() );
 		}
 		return false;
 	}

@@ -1,9 +1,11 @@
 package oop.ex7.commands;
 
 import oop.ex7.ValidationResult;
+import oop.ex7.common.AssignmentExpression;
 import oop.ex7.common.Command;
 import oop.ex7.common.CommandValidator;
 import oop.ex7.common.Scope;
+import oop.ex7.common.Variable;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -13,8 +15,11 @@ import java.util.regex.Matcher;
  */
 public class VariableDeclarationCommand implements Command {
 
+	private Variable var;
+	private AssignmentExpression assign;
+	
     public VariableDeclarationCommand(MatchResult matcher){
-
+    	
     }
 
 
