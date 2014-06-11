@@ -14,12 +14,11 @@ public class MethodDeclaration implements Command {
 	private String[] declaration;
 	
 	public MethodDeclaration( MatchResult declaration ) {
-		this.declaration=new String[3];
+		this.declaration = new String[3];
 		
-		this.declaration[0]=declaration.group(1);
-		this.declaration[1]=declaration.group(2);
-		this.declaration[2]=declaration.group(3);
-		
+		this.declaration[0] = declaration.group( 1 );
+		this.declaration[1] = declaration.group( 2 );
+		this.declaration[2] = declaration.group( 3 );
 		
 		returnType = ReturnType.parse( this.declaration[0] );
 		
@@ -32,7 +31,7 @@ public class MethodDeclaration implements Command {
 				RegexUtils.Match( PARAM_PATTERN, params );
 		for ( MatchResult result : matchResults ) {
 			
-			this.params.add( new Variable( result ) );
+			this.params.add( new Variable( result.group( 1 ), result.group( 2 ) ) );
 		}
 		
 	}
@@ -68,7 +67,8 @@ public class MethodDeclaration implements Command {
 		ValidationResult result = new ValidationResult();
 		if ( getReturnType() == null ) {
 			result.setSuccessful( false );
-			result.append( String.format( "Invalid method return type: '%s'", this.declaration[0]) );
+			result.append( String.format( "Invalid method return type: '%s'",
+					this.declaration[0] ) );
 		}
 		
 		if ( getName() == null || !getName().matches( "[a-zA-Z]\\w*" ) ) {
@@ -79,7 +79,7 @@ public class MethodDeclaration implements Command {
 		
 		// TODO: check length of params
 		for ( Variable param : getParams() ) {
-			result.append( param.isValid(expression,scope) );
+			result.append( param.isValid( expression, scope ) );
 		}
 		
 		return result;

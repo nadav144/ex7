@@ -16,7 +16,7 @@ public class AssignmentExpression implements Command {
 	/**
 	 * 
 	 */
-	public AssignmentExpression() {
+	public AssignmentExpression(Variable var,Expression expression) {
 		// TODO Auto-generated constructor stub
 	}
 	

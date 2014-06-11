@@ -10,7 +10,7 @@ public class ValidationResult {
 	private StringBuilder builder;
 	
 	public ValidationResult() {
-		successful = false;
+		successful = true;
 		builder = new StringBuilder();
 	}
 	

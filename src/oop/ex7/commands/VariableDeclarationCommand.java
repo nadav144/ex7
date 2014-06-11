@@ -4,6 +4,7 @@ import oop.ex7.ValidationResult;
 import oop.ex7.common.AssignmentExpression;
 import oop.ex7.common.Command;
 import oop.ex7.common.CommandValidator;
+import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
 import oop.ex7.common.Variable;
 
@@ -18,17 +19,56 @@ public class VariableDeclarationCommand implements Command {
 	private Variable var;
 	private AssignmentExpression assign;
 	
-    public VariableDeclarationCommand(MatchResult matcher){
+    public VariableDeclarationCommand(String type, String name){
+    	this(type,name,null);
+    }
+    
+    public VariableDeclarationCommand(String type, String name,String assignment){
+    	var=new Variable( type, name );
+    	if (assignment==null){
+    		var.setInited(false);
+    	}
+    	else{
+    		
+    		assign=new AssignmentExpression(var,new Expression(assignment));
+    	}
     	
     }
 
 
     @Override
     public ValidationResult isValid(String expression, Scope scope) {
-        return null;
+    	ValidationResult result=new ValidationResult();
+    	
+    	result.append( getVar().isValid( expression, scope ) );
+    	if (getAssign()!=null){
+    	result.append( getAssign().isValid( expression, scope ) );
+    	}
+    	
+    	if (result.getsuccessful()){
+    		scope.getVars().add( getVar() );
+    	}
+    	
+    	return result;
     }
 
-    @Override
+    
+	/**
+	 * @return the var
+	 */
+	private Variable getVar() {
+		return var;
+	}
+
+	
+	/**
+	 * @return the assign
+	 */
+	private AssignmentExpression getAssign() {
+		return assign;
+	}
+
+	@Override
     public boolean isScope() {
         return false;
     }

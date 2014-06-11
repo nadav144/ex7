@@ -1,10 +1,9 @@
 /**
  * 
  */
-
+	
 package oop.ex7.common;
 
-import java.util.regex.MatchResult;
 import oop.ex7.ValidationResult;
 
 /**
@@ -13,24 +12,27 @@ import oop.ex7.ValidationResult;
  */
 public class Variable implements Command {
 	
+	
+	
+
 	private VarType type;
+	private String typeString;
 	private boolean isArray;
 	private String name;
 	private boolean inited;
-	private int lineDeclared;
 	
-	public Variable(MatchResult declaration){
-		// int a
-		// int[] a
+	public Variable( String type, String name ) {
 		
-		String type=declaration.group(1) ;
-		if (type.endsWith( "[]" )){
-			type=type.substring( 0, type.length()-2 );
-			isArray=true;
+		typeString = type;
+		
+		if ( type != null && type.endsWith( "[]" ) ) {
+			type = type.substring( 0, type.length() - 2 );
+			isArray = true;
 		}
 		
-		this.type=VarType.parse( );
-		name=declaration.group(2);
+		this.type = VarType.parse( type );
+		this.name = name;
+		this.inited=false;
 		
 	}
 	
@@ -82,28 +84,45 @@ public class Variable implements Command {
 	}
 	
 	/**
-	 * @return the lineDeclared
+	 * @param inited the inited to set
 	 */
-	public int getLineDeclared() {
-		return lineDeclared;
+	public void setInited( boolean inited ) {
+		this.inited = inited;
 	}
 	
-
-	/* (non-Javadoc)
-	 * @see oop.ex7.common.CommandValidator#isValid(java.lang.String, oop.ex7.common.Scope)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see oop.ex7.common.CommandValidator#isValid(java.lang.String,
+	 * oop.ex7.common.Scope)
 	 */
 	@Override
 	public ValidationResult isValid( String expression, Scope scope ) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ValidationResult result = new ValidationResult();
+		if ( getType() == null ) {
+			result.setSuccessful( false );
+			result.append( String.format( "Invalid variable type: '%s'",
+					this.typeString ) );
+		}
+		
+		if ( getName() == null || !getName().matches( "[_a-zA-Z]\\w*" ) ) {
+			result.setSuccessful( false );
+			result.append( String.format( "Illegal variable name: '%s'",
+					getName() ) );
+		}
+		return result;
+		
 	}
-
-	/* (non-Javadoc)
+	
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see oop.ex7.common.Command#isScope()
 	 */
 	@Override
 	public boolean isScope() {
 		return false;
 	}
-
+	
 }
