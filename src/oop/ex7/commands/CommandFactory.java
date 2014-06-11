@@ -15,11 +15,14 @@ public class CommandFactory {
 
     public static Command CreateCommand(String expresion){
 
+        if (expresion.equals("}")){
+            return new EndOFScopeCommand();
+        }
         if (expresion.matches(IF_WHILE_STATEMENT)){
 
         }
 
         // TEMP CODE
-        return new VariableDeclarationCommand(RegexUtils.Match("", "").get(0));
+        return new EndOFScopeCommand();
     }
 }
