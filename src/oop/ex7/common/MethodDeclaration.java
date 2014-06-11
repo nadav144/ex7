@@ -4,13 +4,13 @@ import java.util.LinkedList;
 import java.util.regex.MatchResult;
 
 
-public class MethodDecleration implements Command {
+public class MethodDeclaration implements Command {
 	private LinkedList< Variable > params;
 	private ReturnType returnType;
 	private String name;
 
-    public MethodDecleration(MatchResult decleration){
-        name = decleration.group(2);
+    public MethodDeclaration(MatchResult declaration){
+        name = declaration.group(2);
     }
 
 	/**

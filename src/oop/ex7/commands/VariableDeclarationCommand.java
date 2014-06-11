@@ -9,9 +9,9 @@ import java.util.regex.Matcher;
 /**
  * Created by Nadav on 10/06/14.
  */
-public class VariableDeclerationCommand implements CommandValidator {
+public class VariableDeclarationCommand implements CommandValidator {
 
-    public VariableDeclerationCommand(Matcher matcher){
+    public VariableDeclarationCommand(Matcher matcher){
 
     }
 

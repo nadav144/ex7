@@ -1,11 +1,10 @@
 package oop.ex7;
 
 import oop.ex7.common.MainScope;
-import oop.ex7.common.MethodDecleration;
+import oop.ex7.common.MethodDeclaration;
 import oop.ex7.common.RegexUtils;
 import oop.ex7.common.Scope;
 
-import java.io.LineNumberReader;
 import java.util.List;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -73,7 +72,7 @@ public class Parser {
         // Create the main scope first
         MainScope mainScope = new MainScope();
 
-        // Search for method declerations
+        // Search for method declarations
 
         //TODO: Add the regex to config file
         List<MatchResult> results = RegexUtils.Match("^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{", content);
@@ -81,7 +80,7 @@ public class Parser {
         String test = "";
         for (MatchResult res : results){
 
-            mainScope.addMethod(new MethodDecleration(res));
+            mainScope.addMethod(new MethodDeclaration(res));
         }
 
 
