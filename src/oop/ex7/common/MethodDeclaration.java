@@ -10,7 +10,10 @@ public class MethodDeclaration implements Command {
 	private String name;
 
     public MethodDeclaration(MatchResult declaration){
+    	
+    	returnType = ReturnType.valueOf( declaration.group(1) );
         name = declaration.group(2);
+        
     }
 
 	/**

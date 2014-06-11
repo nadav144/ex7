@@ -15,7 +15,11 @@ import java.util.regex.Pattern;
  */
 public class Parser {
 
-    public ValidationResult Parse(String filename, Scope scope){
+    private static final String COMMENT_INDICATOR = "//";
+	private static final String LINE_ENDING_PATTERN = ".*[{|}|;]$";
+
+
+	public ValidationResult Parse(String filename, Scope scope){
 
         /*
         // GetFile Content.
@@ -47,11 +51,11 @@ public class Parser {
     public static String TruncAndFixLines(List<String> lines) throws Exception{
 
         StringBuilder builder = new StringBuilder();
-        Pattern p = Pattern.compile(".*[{|}|;]");
+        Pattern p = Pattern.compile(LINE_ENDING_PATTERN);
 
         for (int i=0;i<lines.size(); i++){
             String line = lines.get(i);
-            if (!line.startsWith("//")){
+            if (!line.startsWith(COMMENT_INDICATOR)){
                 line = line.trim();
                 line = line.replace("\t", "");
                 if (line.length() > 0){
