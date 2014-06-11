@@ -1,6 +1,7 @@
 package oop.ex7;
 
 import oop.ex7.common.MainScope;
+import oop.ex7.common.MethodDecleration;
 import oop.ex7.common.RegexUtils;
 import oop.ex7.common.Scope;
 
@@ -67,17 +68,20 @@ public class Parser {
     }
 
 
-    public static void Parse(String content) {
+    public static void Parse(String content) throws Exception{
 
         // Create the main scope first
         MainScope mainScope = new MainScope();
 
         // Search for method declerations
 
+        //TODO: Add the regex to config file
         List<MatchResult> results = RegexUtils.Match("^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{", content);
+
         String test = "";
         for (MatchResult res : results){
-            test += res.group(0) + "\r\n";
+
+            mainScope.addMethod(new MethodDecleration(res));
         }
 
 
