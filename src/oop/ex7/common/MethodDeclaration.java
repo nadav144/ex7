@@ -1,5 +1,7 @@
 package oop.ex7.common;
 
+import oop.ex7.ValidationResult;
+
 import java.util.LinkedList;
 import java.util.regex.MatchResult;
 
@@ -13,7 +15,6 @@ public class MethodDeclaration implements Command {
     	
     	returnType = ReturnType.valueOf( declaration.group(1) );
         name = declaration.group(2);
-        
     }
 
 	/**
@@ -38,4 +39,13 @@ public class MethodDeclaration implements Command {
 	}
 	
 	
+    @Override
+    public boolean isScope() {
+        return false;
+    }
+
+    @Override
+    public ValidationResult isValid(String expression, Scope scope) {
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package oop.ex7.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,15 +8,25 @@ import java.util.List;
  */
 public class Scope {
 
-    List<Scope> subScopes;
-    List<Variable> vars;
+    private List<Scope> subScopes;
+    private List<Variable> vars;
 
-    Scope parentScope;
+    private Scope parentScope;
+
+    public Scope(){
+        subScopes = new ArrayList<Scope>();
+        vars = new ArrayList<Variable>();
+    }
 
     public MainScope getMainScope(){
 
-        // Go to parent until you get the main scope
+        Scope parent = parentScope;
+        while (parent.getClass() == Scope.class){
+            parent = parent.parentScope;
+        }
 
+        if (parent.getClass() == MainScope.class)
+            return (MainScope)parent;
         return null;
 
     }

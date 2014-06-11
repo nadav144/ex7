@@ -1,10 +1,10 @@
 package oop.ex7;
 
-import oop.ex7.common.MainScope;
-import oop.ex7.common.MethodDeclaration;
-import oop.ex7.common.RegexUtils;
-import oop.ex7.common.Scope;
+import oop.ex7.commands.CommandFactory;
+import oop.ex7.common.*;
 
+import java.io.LineNumberReader;
+import java.io.StringReader;
 import java.util.List;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -71,7 +71,7 @@ public class Parser {
     }
 
 
-    public static void Parse(String content) throws Exception{
+    public static ValidationResult Parse(String content) throws Exception{
 
         // Create the main scope first
         MainScope mainScope = new MainScope();
@@ -87,9 +87,40 @@ public class Parser {
             mainScope.addMethod(new MethodDeclaration(res));
         }
 
+        // Start parsing line by line
+
+        LineNumberReader reader = new LineNumberReader(new StringReader(content));
+        return ParseScope(reader, mainScope);
+
 
 
     }
 
+
+    private static ValidationResult ParseScope(LineNumberReader reader, Scope scope ) throws Exception{
+
+        ValidationResult returnValue = new ValidationResult();
+
+        String line = reader.readLine();
+        while (line != null){
+
+            // Generate the right command for this line.
+            Command command = CommandFactory.CreateCommand(line);
+            //if (!command.Validate)
+            //  return False
+            // if this is a new scope, parse the scope
+
+            if (command.isScope()){
+                Scope commandScope = new Scope();
+                returnValue.Append(ParseScope(reader, scope));
+            }
+
+
+            line = reader.readLine();
+        }
+
+
+        return null;
+    }
 
 }
