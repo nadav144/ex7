@@ -38,7 +38,8 @@ public class AssignmentExpression implements Command {
 		result.append( getExpression().isValid( expression, scope ) );
 		
 		if ( result.getsuccessful() ) {
-			if ( !getVar().getType().equals( getExpression().getType( scope ) ) ) {
+			if ( !VarType.canAssignTo( getVar().getType(),
+					getExpression().getType( scope ) ) ) {
 				result.setSuccessful( false );
 				result.append( String.format(
 						"Invalid assignment type. Expected: '%s', Actual: '%s'",

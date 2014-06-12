@@ -14,4 +14,21 @@ public enum VarType {
 		
 		return null;
 	}
+	
+	public static boolean canAssignTo( VarType lhs, VarType rhs ) {
+		switch ( lhs ) {
+			case STRING:
+			case CHAR:
+			case BOOLEAN:
+				return lhs.equals( rhs );
+			case DOUBLE:
+				if ( lhs.equals( rhs ) ) {
+					return true;
+				}
+			case INT:
+				return INT.equals( rhs );
+			default:
+				return false;
+		}
+	}
 }

@@ -14,7 +14,7 @@ public class MethodInvocationExpression implements Expression {
 	private LinkedList< Expression > params;
 	private String name;
 	
-	public MethodInvocationExpression( String name, String params ) {
+	public MethodInvocationExpression( String name, String params ) throws Exception {
 		this.name = name;
 		
 		this.params = new LinkedList< Expression >();

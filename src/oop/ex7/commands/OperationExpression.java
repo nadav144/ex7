@@ -38,7 +38,7 @@ public class OperationExpression implements Expression {
 	private Expression lhs;
 	private Expression rhs;
 	
-	public OperationExpression( String lhs, String type, String rhs ) {
+	public OperationExpression( String lhs, String type, String rhs ) throws Exception {
 		this.lhsString = lhs;
 		this.rhsString = rhs;
 		this.opString = type;

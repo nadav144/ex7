@@ -14,11 +14,11 @@ public class VariableDeclarationCommand implements Command {
 	private Variable var;
 	private AssignmentExpression assign;
 	
-	public VariableDeclarationCommand( String type, String name ) {
+	public VariableDeclarationCommand( String type, String name ) throws Exception {
 		this( type, name, null );
 	}
 	
-	public VariableDeclarationCommand( String type, String name, String rhs ) {
+	public VariableDeclarationCommand( String type, String name, String rhs ) throws Exception {
 		var = new Variable( type, name );
 		if ( rhs != null ) {
 			assign =

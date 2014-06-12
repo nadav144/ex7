@@ -1,7 +1,7 @@
 /**
  * 
  */
-	
+
 package oop.ex7.common;
 
 import oop.ex7.ValidationResult;
@@ -12,9 +12,6 @@ import oop.ex7.ValidationResult;
  */
 public class Variable implements Command {
 	
-	
-	
-
 	private VarType type;
 	private String typeString;
 	private boolean isArray;
@@ -32,7 +29,7 @@ public class Variable implements Command {
 		
 		this.type = VarType.parse( type );
 		this.name = name;
-		this.inited=false;
+		this.inited = false;
 		
 	}
 	
@@ -84,7 +81,8 @@ public class Variable implements Command {
 	}
 	
 	/**
-	 * @param inited the inited to set
+	 * @param inited
+	 *            the inited to set
 	 */
 	public void setInited( boolean inited ) {
 		this.inited = inited;
@@ -106,7 +104,8 @@ public class Variable implements Command {
 					this.typeString ) );
 		}
 		
-		if ( getName() == null || !getName().matches( "[_a-zA-Z]\\w*" ) ) {
+		if ( getName() == null
+				|| !getName().matches( RegexUtils.VARIABLE_NAME_PATTERN ) ) {
 			result.setSuccessful( false );
 			result.append( String.format( "Illegal variable name: '%s'",
 					getName() ) );
