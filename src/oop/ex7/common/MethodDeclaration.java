@@ -8,7 +8,6 @@ import java.util.regex.MatchResult;
 
 public class MethodDeclaration implements Command {
 	
-	private static final String PARAM_PATTERN = "\\s*(\\w*)\\s*(\\w*)\\s*";
 	private LinkedList< Variable > params;
 	private ReturnType returnType;
 	private String[] declaration;
@@ -28,7 +27,7 @@ public class MethodDeclaration implements Command {
 		// not sure how to do this, other than save the number for later
 		String[] params = this.declaration[2].split( "," );
 		List< MatchResult > matchResults =
-				RegexUtils.Match( PARAM_PATTERN, params );
+				RegexUtils.Match( RegexUtils.PARAM_PATTERN, params );
 		for ( MatchResult result : matchResults ) {
 			
 			this.params.add( new Variable( result.group( 1 ), result.group( 2 ) ) );
@@ -71,7 +70,8 @@ public class MethodDeclaration implements Command {
 					this.declaration[0] ) );
 		}
 		
-		if ( getName() == null || !getName().matches( "[a-zA-Z]\\w*" ) ) {
+		if ( getName() == null
+				|| !getName().matches( RegexUtils.METHOD_NAME_PATTERN ) ) {
 			result.setSuccessful( false );
 			result.append( String.format( "Illegal method name: '%s'",
 					getName() ) );

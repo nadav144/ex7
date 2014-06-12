@@ -1,6 +1,5 @@
 package oop.ex7.common;
 
-import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.MatchResult;
@@ -45,4 +44,35 @@ public class RegexUtils {
         return matcher.toMatchResult();
 
     }
+    
+    /**
+     * group 1 - type, group 2 - name
+     */
+    public static final String PARAM_PATTERN = "\\s*(\\w*)\\s*(\\w*)\\s*";
+    public static final String METHOD_NAME_PATTERN = "[a-zA-Z]\\w*";
+    /**
+	 * group 1 - name group 2 - params
+	 */
+	public static final String METHOD_INVOCATION_PATTERN =
+			"^\\s*([a-zA-Z]\\w*)\\s*\\((.*)\\)\\s*$";
+	/**
+	 * group 1 - lhs, group 2 - operator, group 3 - rhs
+	 */
+	public static final String OPERATION_PATTERN =
+			"^(.*)([\\+\\*\\-/])(.*)\\s*$";
+	/**
+	 * group 1 - string
+	 */
+	public static final String STRING_LITERAL_PATTERN =
+			"^\\s*(\"[^\"]*\")\\s*$";
+	/**
+	 * group 1 - char
+	 */
+	public static final String CHAR_LITERAL_PATTERN = "^\\s*('[^']')\\s*$";
+	/**
+	 * group 1 - double
+	 */
+	public static final String DOUBLE_LITERAL_PATTERN =
+			"^\\s*(-?\\s*\\d+\\.?\\d*)\\s*$";
+	public static final String INT_LITERAL_PATTERN = "^\\s*(-?\\s*\\d+)\\s*$";
 }

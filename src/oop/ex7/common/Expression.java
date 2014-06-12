@@ -1,12 +1,15 @@
+
 package oop.ex7.common;
 
-
-public class Expression {
+public interface Expression extends Command {
 	
-	public Expression(String assignment) {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	
+	/**
+	 * Returns the type the expression will evaluate to. Will only function
+	 * properly if isValid is successful
+	 * 
+	 * @param scope
+	 *            the scope of the expression
+	 * @return the type the expression will evaluate to.
+	 */
+	VarType getType( Scope scope );
 }

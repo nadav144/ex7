@@ -20,6 +20,10 @@ public class MainScope extends Scope {
         }
         methodDeclarations.put(declaration.getName(), declaration);
     }
+    
+    public MethodDeclaration getMethod(String name){
+    	return methodDeclarations.get( name );
+    }
 
 
 
