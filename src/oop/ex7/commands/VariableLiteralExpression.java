@@ -19,9 +19,14 @@ public class VariableLiteralExpression implements Expression {
 	public boolean isScope() {
 		return false;
 	}
-	
-	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+
+    @Override
+    public void updateScope(Scope scope) {
+
+    }
+
+    @Override
+	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		int index = scope.getVars().indexOf( getName() );
 		

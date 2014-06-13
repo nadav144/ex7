@@ -32,7 +32,7 @@ public class MethodInvocationExpression implements Expression {
 	 * oop.ex7.common.Scope)
 	 */
 	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		
 		MethodDeclaration declatation =
@@ -82,12 +82,17 @@ public class MethodInvocationExpression implements Expression {
 	public boolean isScope() {
 		return false;
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see oop.ex7.common.Expression#getType()
-	 */
+
+    @Override
+    public void updateScope(Scope scope) {
+
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see oop.ex7.common.Expression#getType()
+     */
 	@Override
 	public VarType getType( Scope scope ) {
 		MethodDeclaration declatation =

@@ -29,19 +29,13 @@ public class VariableDeclarationCommand implements Command {
 	}
 	
 	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+	public ValidationResult isValid( Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		
-		result.append( getVar().isValid( expression, scope ) );
+		result.append( getVar().isValid( scope ) );
 		if ( getAssign() != null ) {
-			result.append( getAssign().isValid( expression, scope ) );
-			var.setInited( true );
+			result.append( getAssign().isValid(  scope ) );
 		}
-		
-		if ( result.getsuccessful() ) {
-			scope.getVars().add( getVar() );
-		}
-		
 		return result;
 	}
 	
@@ -63,4 +57,10 @@ public class VariableDeclarationCommand implements Command {
 	public boolean isScope() {
 		return false;
 	}
+
+    @Override
+    public void updateScope(Scope scope) {
+        var.setInited( true );
+        scope.getVars().add( getVar() );
+    }
 }

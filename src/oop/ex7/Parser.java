@@ -1,6 +1,7 @@
 package oop.ex7;
 
 
+import oop.ex7.commands.CommandFactory;
 import oop.ex7.commands.EndOFScopeCommand;
 import oop.ex7.common.*;
 
@@ -106,18 +107,23 @@ public class Parser {
         while (line != null){
 
             // Generate the right command for this line.
-            Command command = null;//CommandFactory.CreateCommand(line);
-            //returnValue.append(command.isValid(scope))
-            //  return False
-            // if this is a new scope, parse the scope
+            Command command = CommandFactory.CreateCommand(line);
+            returnValue.append(command.isValid(scope));
+            if (!returnValue.getsuccessful())
+                return returnValue;
+
+
 
             if (command.isScope()){
                 Scope commandScope = new Scope(scope);
+                command.updateScope(commandScope);
                 returnValue.append(ParseScope(reader, scope));
             } else if (command.getClass() == EndOFScopeCommand.class){
                 return returnValue;
+            } else {
+                // update current scope
+                command.updateScope(scope);
             }
-
 
             line = reader.readLine();
         }

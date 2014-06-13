@@ -60,9 +60,16 @@ public class MethodDeclaration implements Command {
 	public boolean isScope() {
 		return false;
 	}
-	
-	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+
+    @Override
+    public void updateScope(Scope scope) {
+        for (Variable var : getParams()){
+            scope.getVars().add(var);
+        }
+    }
+
+    @Override
+	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		if ( getReturnType() == null ) {
 			result.setSuccessful( false );
@@ -76,12 +83,15 @@ public class MethodDeclaration implements Command {
 			result.append( String.format( "Illegal method name: '%s'",
 					getName() ) );
 		}
-		
-		// TODO: check length of params
-		for ( Variable param : getParams() ) {
-			result.append( param.isValid( expression, scope ) );
-		}
-		
+
+        // TODO: check length of params
+
+        for ( Variable param : getParams() ) {
+            result.append( param.isValid(scope ) );
+        }
+
+
+
 		return result;
 	}
 }

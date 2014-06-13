@@ -23,7 +23,12 @@ public class IfWhileCommand implements Command {
     }
 
     @Override
-    public ValidationResult isValid(String expression, Scope scope) {
+    public void updateScope(Scope scope) {
+
+    }
+
+    @Override
+    public ValidationResult isValid(Scope scope) {
         return null;
     }
 }

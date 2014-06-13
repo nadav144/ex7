@@ -18,8 +18,8 @@ public class NegatedVariableLiteralExpression extends VariableLiteralExpression 
 	 * oop.ex7.common.Scope)
 	 */
 	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
-		ValidationResult result = super.isValid( expression, scope );
+	public ValidationResult isValid(Scope scope ) {
+		ValidationResult result = super.isValid(scope );
 		
 		if ( result.getsuccessful() ) {
 			VarType type = super.getType( scope );
