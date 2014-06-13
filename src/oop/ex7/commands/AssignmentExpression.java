@@ -15,6 +15,7 @@ public class AssignmentExpression implements Command {
 	
 	private Variable var;
 	private Expression expression;
+
 	
 	/**
 	 * 

@@ -1,9 +1,5 @@
-void foo() {
-				 if 	        		   (        		  foo2 (       5           )        )  {		
-}
+int[] a;
+void foo(){
+a[1] = 8;
 return;
-}
-
-boolean foo2(int a) {
-	return true;
 }

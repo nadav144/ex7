@@ -15,6 +15,7 @@ public class CommandFactory {
     public static final String IF_WHILE_STATEMENT = "^\\s*(?:if|while)\\s*\\((.*)\\)\\s*\\{";
     public static final String VAR_DECLARATION_STATEMENT = "(int|double|String|boolean|char)(\\[\\])?\\s(\\w*);";
     public static final String VAR_DECLARATION_INIT_SATEMENT = "(int|double|String|boolean|char)(\\[\\])?\\s(\\w*)\\s*=\\s*(.*);";
+    public static final String VAR_ASSIGNMENT_STATEMENT = "\\s*(\\w*)(\\[(.*)\\])?\\s*=\\s*(.*);";
     public static final String METHOD_RETURN_STATEMENT = "return\\s*(.*);";
 
 
@@ -29,6 +30,10 @@ public class CommandFactory {
             MatchResult res = RegexUtils.MatchSignle(VAR_DECLARATION_INIT_SATEMENT, expresion);
             String typestring = (res.group(2) != null) ? res.group(1) + res.group(2) : res.group(1);
             return new VariableDeclarationCommand(typestring, res.group(3), res.group(4));
+        } else if (expresion.matches(VAR_ASSIGNMENT_STATEMENT)){
+            MatchResult res = RegexUtils.MatchSignle(VAR_ASSIGNMENT_STATEMENT, expresion);
+            // TODO: OOOPS... what to do now?
+            throw new Exception();
         }
         if (expresion.matches(IF_WHILE_STATEMENT)){
             MatchResult res = RegexUtils.MatchSignle(IF_WHILE_STATEMENT, expresion);
