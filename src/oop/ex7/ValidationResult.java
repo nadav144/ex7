@@ -20,6 +20,10 @@ public class ValidationResult {
 	public Boolean getsuccessful() {
 		return successful;
 	}
+
+    public String getMessages(){
+        return builder.toString();
+    }
 	
 	/**
 	 * @param successfull
@@ -33,6 +37,11 @@ public class ValidationResult {
 		setSuccessful( getsuccessful() && result.getsuccessful() );
 		builder.append( result.getBuilder().toString() );
 	}
+
+    public void fail(String message){
+        setSuccessful(false);
+        append(message);
+    }
 	
 	/**
 	 * @return the builder

@@ -4,7 +4,6 @@ package oop.ex7.commands;
 import java.util.LinkedList;
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
-import oop.ex7.common.MethodDeclaration;
 import oop.ex7.common.RegexUtils;
 import oop.ex7.common.Scope;
 import oop.ex7.common.VarType;

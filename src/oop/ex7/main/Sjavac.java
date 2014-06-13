@@ -2,6 +2,7 @@ package oop.ex7.main;
 
 import com.sun.org.apache.bcel.internal.classfile.LineNumber;
 import oop.ex7.Parser;
+import oop.ex7.ValidationResult;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -24,18 +25,19 @@ public class Sjavac {
 
             String Content = Parser.TruncAndFixLines(lines);
 
-            Parser.Parse(Content);
-
-
-        // Handle Files - Trim, Syntax
-
-        // MainScope = Parser.ParseMethods()
-
-        // Parser.Parse(fileName, MainScope)
+            ValidationResult res = Parser.Parse(Content);
+            if (res.getsuccessful()){
+                System.out.println(0);
+            } else {
+                System.out.println(1);
+                System.out.println(res.getMessages());
+            }
 
         // print if needed
         } catch (Exception ex){
-            System.out.println(0);
+            System.out.println(1);
+            System.out.println(ex.getMessage());
+
 
         }
     }

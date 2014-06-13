@@ -1,5 +1,7 @@
 package oop.ex7.common;
 
+import oop.ex7.commands.MethodDeclaration;
+
 import java.util.HashMap;
 
 /**

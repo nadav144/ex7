@@ -2,6 +2,7 @@ package oop.ex7.commands;
 
 import oop.ex7.common.Command;
 import oop.ex7.common.RegexUtils;
+import oop.ex7.common.Scope;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
@@ -14,16 +15,30 @@ public class CommandFactory {
     public static final String IF_WHILE_STATEMENT = "^\\s*(?:if|while)\\s*\\((.*)\\)\\s*\\{";
     public static final String VAR_DECLARATION_STATEMENT = "(int|double|String|boolean|char)(\\[\\])?\\s(\\w*);";
     public static final String VAR_DECLARATION_INIT_SATEMENT = "(int|double|String|boolean|char)(\\[\\])?\\s(\\w*)\\s*=\\s*(.*);";
+    public static final String METHOD_RETURN_STATEMENT = "return\\s*(.*);";
 
 
-    public static Command CreateCommand(String expresion) throws Exception{
+    public static Command CreateCommand(String expresion, Scope scope) throws Exception{
 
         if (expresion.matches(VAR_DECLARATION_STATEMENT)){
             MatchResult res = RegexUtils.MatchSignle(VAR_DECLARATION_STATEMENT, expresion);
-            return new VariableDeclarationCommand(res.group(1) + res.group(2), res.group(3));
+            String typestring = (res.group(2) != null) ? res.group(1) + res.group(2) : res.group(1);
+            return new VariableDeclarationCommand(typestring, res.group(3));
+
         } else if (expresion.matches(VAR_DECLARATION_INIT_SATEMENT)){
             MatchResult res = RegexUtils.MatchSignle(VAR_DECLARATION_INIT_SATEMENT, expresion);
-            return new VariableDeclarationCommand(res.group(1) + res.group(2), res.group(3), res.group(4));
+            String typestring = (res.group(2) != null) ? res.group(1) + res.group(2) : res.group(1);
+            return new VariableDeclarationCommand(typestring, res.group(3), res.group(4));
+        }
+        else if (expresion.matches(RegexUtils.METHOD_DECLARATION_PATTERN)){
+            MatchResult res = RegexUtils.MatchSignle(RegexUtils.METHOD_DECLARATION_PATTERN, expresion);
+            // Get the name and return the command from the main scope
+            String methodName = res.group(2);
+            return scope.getMainScope().getMethod(methodName);
+
+        } else if (expresion.matches(METHOD_RETURN_STATEMENT)){
+            MatchResult res = RegexUtils.MatchSignle(METHOD_RETURN_STATEMENT, expresion);
+            return new ReturnCommand(res.group(1));
         }
 
         else if (expresion.equals("}")){
@@ -33,7 +48,7 @@ public class CommandFactory {
 
         }
 
-        // TEMP CODE
-        return new EndOFScopeCommand();
+        // if nothing matches - throw exception
+        throw new Exception(expresion + " cannot be reconzied.");
     }
 }

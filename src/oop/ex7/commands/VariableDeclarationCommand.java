@@ -61,6 +61,6 @@ public class VariableDeclarationCommand implements Command {
     @Override
     public void updateScope(Scope scope) {
         var.setInited( true );
-        scope.getVars().add( getVar() );
+        scope.getVars().put( getVar().getName(), getVar() );
     }
 }

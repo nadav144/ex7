@@ -3,6 +3,7 @@ package oop.ex7;
 
 import oop.ex7.commands.CommandFactory;
 import oop.ex7.commands.EndOFScopeCommand;
+import oop.ex7.commands.MethodDeclaration;
 import oop.ex7.common.*;
 
 import java.io.LineNumberReader;
@@ -81,7 +82,7 @@ public class Parser {
         // Search for method declarations
 
         //TODO: Add the regex to config file
-        List<MatchResult> results = RegexUtils.Match("^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{", content);
+        List<MatchResult> results = RegexUtils.Match(RegexUtils.METHOD_DECLARATION_PATTERN, content);
 
         String test = "";
         for (MatchResult res : results){
@@ -107,17 +108,15 @@ public class Parser {
         while (line != null){
 
             // Generate the right command for this line.
-            Command command = CommandFactory.CreateCommand(line);
+            Command command = CommandFactory.CreateCommand(line, scope);
             returnValue.append(command.isValid(scope));
             if (!returnValue.getsuccessful())
                 return returnValue;
 
-
-
             if (command.isScope()){
-                Scope commandScope = new Scope(scope);
+                Scope commandScope = new Scope(scope, command);
                 command.updateScope(commandScope);
-                returnValue.append(ParseScope(reader, scope));
+                returnValue.append(ParseScope(reader, commandScope));
             } else if (command.getClass() == EndOFScopeCommand.class){
                 return returnValue;
             } else {
@@ -125,7 +124,11 @@ public class Parser {
                 command.updateScope(scope);
             }
 
+            if (!returnValue.getsuccessful())
+                return returnValue;
+
             line = reader.readLine();
+
         }
 
         if (scope.getClass() != MainScope.class){
@@ -134,7 +137,7 @@ public class Parser {
         }
 
 
-        return null;
+        return returnValue;
     }
 
 }

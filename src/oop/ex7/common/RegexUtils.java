@@ -31,7 +31,7 @@ public class RegexUtils {
 		
 		for ( String string : content ) {
 			Matcher matcher = regex.matcher( string );
-			while ( matcher.find() ) {
+			if (matcher.find() ) {
 				returnValue.add( matcher.toMatchResult() );
 			}
 		}
@@ -90,4 +90,6 @@ public class RegexUtils {
 	 */
 	public static final String BOOLEAN_LITERAL_PATTERN =
 			"^\\s*(true|false)\\s*$";
+
+    public static final String METHOD_DECLARATION_PATTERN = "^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{";
 }

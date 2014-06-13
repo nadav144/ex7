@@ -20,6 +20,16 @@ public class EndOFScopeCommand implements Command {
 
     @Override
     public ValidationResult isValid(Scope scope) {
-        return null;
+        ValidationResult res = new ValidationResult();
+        boolean shouldReturn = false;
+        if (scope.getReturnType() != null){
+            shouldReturn = true;
+        }
+        if (shouldReturn != scope.isReturnedValue()){
+            res.fail("Scope should return " + scope.getReturnType().toString());
+        }
+
+        return res;
+
     }
 }

@@ -57,7 +57,13 @@ public class ExpressionFactory {
 			result =
 					RegexUtils.MatchSignle( RegexUtils.DOUBLE_LITERAL_PATTERN,
 							expression );
-			return new LiteralExpression( VarType.DOUBLE );
+            try{
+                Integer.parseInt(result.group());
+                return new LiteralExpression(VarType.INT);
+            }
+            catch (Exception ex){
+                return new LiteralExpression( VarType.DOUBLE );
+            }
 		}
 		if ( Pattern.matches( RegexUtils.BOOLEAN_LITERAL_PATTERN, expression ) ) {
 			result =
