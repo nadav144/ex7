@@ -11,13 +11,20 @@ public class Scope {
 	
 	private List< Scope > subScopes;
 	private List< Variable > vars;
+    private ReturnType returnType;
 	
 	private Scope parentScope;
 	
 	public Scope() {
 		subScopes = new ArrayList< Scope >();
 		vars = new ArrayList< Variable >();
+        returnType = null;
 	}
+
+    public Scope(Scope Scope){
+        super();
+        parentScope = parentScope;
+    }
 	
 	public MainScope getMainScope() {
 		
@@ -38,5 +45,8 @@ public class Scope {
 	public List< Variable > getVars() {
 		return vars;
 	}
-	
+
+    public ReturnType getReturnType() {
+        return returnType;
+    }
 }

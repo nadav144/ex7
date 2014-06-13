@@ -1,6 +1,7 @@
 package oop.ex7;
 
 
+import oop.ex7.commands.EndOFScopeCommand;
 import oop.ex7.common.*;
 
 import java.io.LineNumberReader;
@@ -106,17 +107,24 @@ public class Parser {
 
             // Generate the right command for this line.
             Command command = null;//CommandFactory.CreateCommand(line);
-            //if (!command.Validate)
+            //returnValue.append(command.isValid(scope))
             //  return False
             // if this is a new scope, parse the scope
 
             if (command.isScope()){
-                Scope commandScope = new Scope();
+                Scope commandScope = new Scope(scope);
                 returnValue.append(ParseScope(reader, scope));
+            } else if (command.getClass() == EndOFScopeCommand.class){
+                return returnValue;
             }
 
 
             line = reader.readLine();
+        }
+
+        if (scope.getClass() != MainScope.class){
+            returnValue.setSuccessful(false);
+            returnValue.append("Expected }");
         }
 
 
