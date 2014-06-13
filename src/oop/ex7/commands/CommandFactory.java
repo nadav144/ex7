@@ -30,6 +30,11 @@ public class CommandFactory {
             String typestring = (res.group(2) != null) ? res.group(1) + res.group(2) : res.group(1);
             return new VariableDeclarationCommand(typestring, res.group(3), res.group(4));
         }
+        if (expresion.matches(IF_WHILE_STATEMENT)){
+            MatchResult res = RegexUtils.MatchSignle(IF_WHILE_STATEMENT, expresion);
+            return new IfWhileCommand(ExpressionFactory.instance().create(res.group(1)));
+
+        }
         else if (expresion.matches(RegexUtils.METHOD_DECLARATION_PATTERN)){
             MatchResult res = RegexUtils.MatchSignle(RegexUtils.METHOD_DECLARATION_PATTERN, expresion);
             // Get the name and return the command from the main scope
@@ -44,9 +49,7 @@ public class CommandFactory {
         else if (expresion.equals("}")){
             return new EndOFScopeCommand();
         }
-        if (expresion.matches(IF_WHILE_STATEMENT)){
 
-        }
 
         // if nothing matches - throw exception
         throw new Exception(expresion + " cannot be reconzied.");

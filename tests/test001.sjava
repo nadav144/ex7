@@ -1,15 +1,9 @@
-int a = 5;
-int goo() {
-
-	int j = a;
-
-	return j;
-
+void foo() {
+				 if 	        		   (        		  foo2 (       5           )        )  {		
 }
-int goo2(int test) {
+return;
+}
 
-	int j = a;
-
-	return j;
-
+boolean foo2(int a) {
+	return true;
 }
