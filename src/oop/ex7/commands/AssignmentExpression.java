@@ -13,8 +13,9 @@ import oop.ex7.common.*;
  */
 public class AssignmentExpression implements Command {
 	
-	private Variable var;
+	protected Variable var;
 	private Expression expression;
+
 	
 	/**
 	 * 
@@ -31,15 +32,15 @@ public class AssignmentExpression implements Command {
 	 * oop.ex7.common.Scope)
 	 */
 	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		
-		result.append( getVar().isValid( expression, scope ) );
-		result.append( getExpression().isValid( expression, scope ) );
+		result.append( getVar().isValid(scope ) );
+		result.append( getExpression().isValid(scope ) );
 		
 		if ( result.getsuccessful() ) {
-			if ( !VarType.canAssignTo( getVar().getType(),
-					getExpression().getType( scope ) ) ) {
+			if ( !VarType.canAssignTo(getVar().getType(),
+                    getExpression().getType(scope)) ) {
 				result.setSuccessful( false );
 				result.append( String.format(
 						"Invalid assignment type. Expected: '%s', Actual: '%s'",
@@ -61,8 +62,13 @@ public class AssignmentExpression implements Command {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	/**
+
+    @Override
+    public void updateScope(Scope scope) {
+        getVar().setInited(true);
+    }
+
+    /**
 	 * @return the var
 	 */
 	private Variable getVar() {

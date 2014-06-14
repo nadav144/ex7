@@ -1,14 +1,16 @@
 
-package oop.ex7.common;
+package oop.ex7.commands;
 
 import oop.ex7.ValidationResult;
+import oop.ex7.common.*;
+
 import java.util.List;
 import java.util.LinkedList;
 import java.util.regex.MatchResult;
 
 public class MethodDeclaration implements Command {
 	
-	private LinkedList< Variable > params;
+	private LinkedList<Variable> params;
 	private ReturnType returnType;
 	private String[] declaration;
 	
@@ -25,13 +27,16 @@ public class MethodDeclaration implements Command {
 		
 		// TODO: params.length should equal to matchResults.length
 		// not sure how to do this, other than save the number for later
-		String[] params = this.declaration[2].split( "," );
-		List< MatchResult > matchResults =
-				RegexUtils.Match( RegexUtils.PARAM_PATTERN, params );
-		for ( MatchResult result : matchResults ) {
-			
-			this.params.add( new Variable( result.group( 1 ), result.group( 2 ) ) );
-		}
+        if (!this.declaration[2].equals("")){
+            String paramsString = this.declaration[2].trim();
+            String[] params = paramsString.split( "," );
+            List< MatchResult > matchResults =
+                    RegexUtils.Match(RegexUtils.PARAM_PATTERN, params);
+            for ( MatchResult result : matchResults ) {
+
+                this.params.add( new Variable( result.group( 1 ), result.group( 2 ) ) );
+            }
+        }
 		
 	}
 	
@@ -58,11 +63,18 @@ public class MethodDeclaration implements Command {
 	
 	@Override
 	public boolean isScope() {
-		return false;
+		return true;
 	}
-	
-	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+
+    @Override
+    public void updateScope(Scope scope) {
+        for (Variable var : getParams()){
+            scope.getVars().put(var.getName(), var);
+        }
+    }
+
+    @Override
+	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		if ( getReturnType() == null ) {
 			result.setSuccessful( false );
@@ -76,12 +88,15 @@ public class MethodDeclaration implements Command {
 			result.append( String.format( "Illegal method name: '%s'",
 					getName() ) );
 		}
-		
-		// TODO: check length of params
-		for ( Variable param : getParams() ) {
-			result.append( param.isValid( expression, scope ) );
-		}
-		
+
+        // TODO: check length of params
+
+        for ( Variable param : getParams() ) {
+            result.append( param.isValid(scope ) );
+        }
+
+
+
 		return result;
 	}
 }

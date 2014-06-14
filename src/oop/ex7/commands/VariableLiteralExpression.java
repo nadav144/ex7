@@ -19,21 +19,23 @@ public class VariableLiteralExpression implements Expression {
 	public boolean isScope() {
 		return false;
 	}
-	
-	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+
+    @Override
+    public void updateScope(Scope scope) {
+
+    }
+
+    @Override
+	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();
-		int index = scope.getVars().indexOf( getName() );
+		Variable var = scope.getVar(getName());
 		
-		if ( index < 0 ) {
+		if ( var == null) {
 			result.setSuccessful( false );
 			result.append( String.format(
 					"Requested variable is not declared in scope. Name: '%s'",
 					getName() ) );
-		}
-		
-		Variable var = scope.getVars().get( index );
-		if ( !var.isInited() ) {
+		} else if ( !var.isInited() ) {
 			result.setSuccessful( false );
 			result.append( String.format(
 					"Variable is not initialized in scope. Name: '%s'",
@@ -44,12 +46,10 @@ public class VariableLiteralExpression implements Expression {
 	
 	@Override
 	public VarType getType( Scope scope ) {
-		int index = scope.getVars().indexOf( getName() );
-		
-		if ( index < 0 ) {
-			return null;
-		}
-		return scope.getVars().get( index ).getType();
+        Variable var = scope.getVar(getName());
+        if (var == null)
+            return null;
+		return var.getType();
 	}
 	
 	/**

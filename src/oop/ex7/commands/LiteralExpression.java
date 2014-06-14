@@ -18,9 +18,14 @@ public class LiteralExpression implements Expression {
 	public boolean isScope() {
 		return false;
 	}
-	
-	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+
+    @Override
+    public void updateScope(Scope scope) {
+
+    }
+
+    @Override
+	public ValidationResult isValid(Scope scope ) {
 		return new ValidationResult();
 	}
 	

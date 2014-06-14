@@ -95,7 +95,7 @@ public class Variable implements Command {
 	 * oop.ex7.common.Scope)
 	 */
 	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+	public ValidationResult isValid(Scope scope ) {
 		
 		ValidationResult result = new ValidationResult();
 		if ( getType() == null ) {
@@ -123,5 +123,10 @@ public class Variable implements Command {
 	public boolean isScope() {
 		return false;
 	}
-	
+
+    @Override
+    public void updateScope(Scope scope) {
+
+    }
+
 }

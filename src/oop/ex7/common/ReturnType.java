@@ -14,4 +14,8 @@ public enum ReturnType {
 		
 		return null;
 	}
+
+    public boolean canReturn(VarType type){
+        return (parse(type.toString()) == this);
+    }
 }

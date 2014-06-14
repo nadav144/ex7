@@ -55,7 +55,7 @@ public class OperationExpression implements Expression {
 	 * oop.ex7.common.Scope)
 	 */
 	@Override
-	public ValidationResult isValid( String expression, Scope scope ) {
+	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		
 		if ( getOpType() == null ) {
@@ -64,8 +64,8 @@ public class OperationExpression implements Expression {
 					getOpString() ) );
 		}
 		
-		result.append( getLhs().isValid( expression, scope ) );
-		result.append( getRhs().isValid( expression, scope ) );
+		result.append( getLhs().isValid( scope ) );
+		result.append( getRhs().isValid( scope ) );
 		
 		if ( result.getsuccessful() ) {
 			VarType lType = getLhs().getType( scope );
@@ -92,12 +92,17 @@ public class OperationExpression implements Expression {
 	public boolean isScope() {
 		return false;
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see oop.ex7.common.Expression#getType(oop.ex7.common.Scope)
-	 */
+
+    @Override
+    public void updateScope(Scope scope) {
+
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see oop.ex7.common.Expression#getType(oop.ex7.common.Scope)
+     */
 	@Override
 	public VarType getType( Scope scope ) {
 		VarType lType = getLhs().getType( scope );

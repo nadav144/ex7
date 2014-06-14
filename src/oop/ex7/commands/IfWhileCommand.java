@@ -2,7 +2,9 @@ package oop.ex7.commands;
 
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Command;
+import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
+import oop.ex7.common.VarType;
 
 import java.util.regex.MatchResult;
 
@@ -11,10 +13,10 @@ import java.util.regex.MatchResult;
  */
 public class IfWhileCommand implements Command {
 
-    private String booleanExpresion;
+    private Expression booleanExpresion;
 
-    public IfWhileCommand(MatchResult matchResult){
-        booleanExpresion = matchResult.group(1);
+    public IfWhileCommand(Expression expression){
+        booleanExpresion = expression;
     }
 
     @Override
@@ -23,7 +25,17 @@ public class IfWhileCommand implements Command {
     }
 
     @Override
-    public ValidationResult isValid(String expression, Scope scope) {
-        return null;
+    public void updateScope(Scope scope) {
+
+    }
+
+    @Override
+    public ValidationResult isValid(Scope scope) {
+        ValidationResult res = new ValidationResult();
+        res.append(booleanExpresion.isValid(scope));
+        if (res.getsuccessful() && booleanExpresion.getType(scope) != VarType.BOOLEAN)
+            res.fail("IF or While statement expression is not a valid boolean expression");
+
+        return res;
     }
 }

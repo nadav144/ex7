@@ -1,15 +1,5 @@
-int a = 5;
-int goo() {
-
-	int j = a;
-
-	return j;
-
-}
-int goo2(int test) {
-
-	int j = a;
-
-	return j;
-
+int[] a;
+void foo(){
+a[1] = 8;
+return;
 }
