@@ -4,9 +4,7 @@ import oop.ex7.ValidationResult;
 import oop.ex7.common.Command;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
-import oop.ex7.common.VarType;
-
-import java.util.regex.MatchResult;
+import oop.ex7.common.TermType;
 
 /**
  * Created by Nadav on 11/06/14.
@@ -33,7 +31,7 @@ public class IfWhileCommand implements Command {
     public ValidationResult isValid(Scope scope) {
         ValidationResult res = new ValidationResult();
         res.append(booleanExpresion.isValid(scope));
-        if (res.getsuccessful() && booleanExpresion.getType(scope) != VarType.BOOLEAN)
+        if (res.getsuccessful() && !booleanExpresion.getType(scope).equals(  TermType.VarType.BOOLEAN))
             res.fail("IF or While statement expression is not a valid boolean expression");
 
         return res;

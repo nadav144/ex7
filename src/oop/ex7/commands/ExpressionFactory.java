@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.RegexUtils;
-import oop.ex7.common.VarType;
+import oop.ex7.common.TermType;
 
 public class ExpressionFactory {
 	
@@ -53,13 +53,13 @@ public class ExpressionFactory {
 			result =
 					RegexUtils.MatchSignle( RegexUtils.STRING_LITERAL_PATTERN,
 							expression );
-			return new LiteralExpression( VarType.STRING );
+			return new LiteralExpression( new TermType(TermType.VarType.STRING ));
 		}
 		if ( Pattern.matches( RegexUtils.CHAR_LITERAL_PATTERN, expression ) ) {
 			result =
 					RegexUtils.MatchSignle( RegexUtils.CHAR_LITERAL_PATTERN,
 							expression );
-			return new LiteralExpression( VarType.CHAR );
+			return new LiteralExpression( new TermType(TermType.VarType.CHAR ));
 		}
 		if ( Pattern.matches( RegexUtils.DOUBLE_LITERAL_PATTERN, expression ) ) {
 			result =
@@ -67,17 +67,17 @@ public class ExpressionFactory {
 							expression );
             try{
                 Integer.parseInt(result.group().trim());
-                return new LiteralExpression(VarType.INT);
+                return new LiteralExpression(new TermType(TermType.VarType.INT));
             }
             catch (Exception ex){
-                return new LiteralExpression( VarType.DOUBLE );
+                return new LiteralExpression(new TermType( TermType.VarType.DOUBLE) );
             }
 		}
 		if ( Pattern.matches( RegexUtils.BOOLEAN_LITERAL_PATTERN, expression ) ) {
 			result =
 					RegexUtils.MatchSignle( RegexUtils.BOOLEAN_LITERAL_PATTERN,
 							expression );
-			return new LiteralExpression( VarType.BOOLEAN );
+			return new LiteralExpression( new TermType(TermType.VarType.BOOLEAN ));
 		}
 		if ( Pattern.matches( RegexUtils.VARIABLE_NAME_PATTERN, expression ) ) {
 			result =

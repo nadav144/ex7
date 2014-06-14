@@ -11,5 +11,5 @@ public interface Expression extends Command {
 	 *            the scope of the expression
 	 * @return the type the expression will evaluate to.
 	 */
-	VarType getType( Scope scope );
+	TermType getType( Scope scope );
 }

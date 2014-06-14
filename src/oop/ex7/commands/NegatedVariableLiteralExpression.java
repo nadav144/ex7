@@ -3,7 +3,7 @@ package oop.ex7.commands;
 
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Scope;
-import oop.ex7.common.VarType;
+import oop.ex7.common.TermType;
 
 public class NegatedVariableLiteralExpression extends VariableLiteralExpression {
 	
@@ -18,12 +18,12 @@ public class NegatedVariableLiteralExpression extends VariableLiteralExpression 
 	 * oop.ex7.common.Scope)
 	 */
 	@Override
-	public ValidationResult isValid(Scope scope ) {
-		ValidationResult result = super.isValid(scope );
+	public ValidationResult isValid( Scope scope ) {
+		ValidationResult result = super.isValid( scope );
 		
 		if ( result.getsuccessful() ) {
-			VarType type = super.getType( scope );
-			if ( !VarType.INT.equals( type ) && !VarType.DOUBLE.equals( type ) ) {
+			TermType type = super.getType( scope );
+			if ( !TermType.isArithmetic( type ) ) {
 				result.setSuccessful( false );
 				result.append( String.format(
 						"Cannot negate variable of specified type. Type: '%s'",

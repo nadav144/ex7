@@ -4,7 +4,7 @@ package oop.ex7.commands;
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
-import oop.ex7.common.VarType;
+import oop.ex7.common.TermType;
 
 public class OperationExpression implements Expression {
 	
@@ -38,7 +38,8 @@ public class OperationExpression implements Expression {
 	private Expression lhs;
 	private Expression rhs;
 	
-	public OperationExpression( String lhs, String type, String rhs ) throws Exception {
+	public OperationExpression( String lhs, String type, String rhs )
+			throws Exception {
 		this.lhsString = lhs;
 		this.rhsString = rhs;
 		this.opString = type;
@@ -55,7 +56,7 @@ public class OperationExpression implements Expression {
 	 * oop.ex7.common.Scope)
 	 */
 	@Override
-	public ValidationResult isValid(Scope scope ) {
+	public ValidationResult isValid( Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		
 		if ( getOpType() == null ) {
@@ -68,11 +69,11 @@ public class OperationExpression implements Expression {
 		result.append( getRhs().isValid( scope ) );
 		
 		if ( result.getsuccessful() ) {
-			VarType lType = getLhs().getType( scope );
-			VarType rType = getRhs().getType( scope );
-			if ( !VarType.INT.equals( lType ) || !VarType.DOUBLE.equals( lType )
-					|| !VarType.INT.equals( rType )
-					|| !VarType.DOUBLE.equals( rType ) ) {
+			TermType lType = getLhs().getType( scope );
+			TermType rType = getRhs().getType( scope );
+			if ( !TermType.isArithmetic( lType )
+					|| !TermType.isArithmetic( rType ) || lType.isArray()
+					|| rType.isArray() ) {
 				result.setSuccessful( false );
 				result.append( String.format(
 						"Invalid operand types. Left: '%s', Right: '%s'",
@@ -92,30 +93,32 @@ public class OperationExpression implements Expression {
 	public boolean isScope() {
 		return false;
 	}
-
-    @Override
-    public void updateScope(Scope scope) {
-
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see oop.ex7.common.Expression#getType(oop.ex7.common.Scope)
-     */
+	
 	@Override
-	public VarType getType( Scope scope ) {
-		VarType lType = getLhs().getType( scope );
-		VarType rType = getRhs().getType( scope );
+	public void updateScope( Scope scope ) {
 		
-		if ( VarType.INT.equals( lType ) && VarType.INT.equals( rType ) ) {
-			return VarType.INT;
-			
-		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see oop.ex7.common.Expression#getType(oop.ex7.common.Scope)
+	 */
+	@Override
+	public TermType getType( Scope scope ) {
+		TermType lType = getLhs().getType( scope );
+		TermType rType = getRhs().getType( scope );
 		
-		else {
-			return VarType.DOUBLE;
-		}
+		return TermType.getCommon( new TermType[] { lType, rType } );
+		// if ( VarType.INT.equals( lType ) && VarType.INT.equals( rType ) ) {
+		// return VarType.INT;
+		//
+		// }
+		//
+		// else {
+		// return VarType.DOUBLE;
+		// }
+		// TODO: remove comment
 	}
 	
 	/**

@@ -3,9 +3,7 @@ package oop.ex7.common;
 
 import oop.ex7.commands.MethodDeclaration;
 
-import javax.lang.model.element.Name;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class Scope {
 	
 	private List< Scope > subScopes;
 	private HashMap<String, Variable > vars;
-    private ReturnType returnType;
+    private TermType  returnType;
     private boolean returnedValue;
 	
 	private Scope parentScope;
@@ -72,7 +70,7 @@ public class Scope {
             return null;
     }
 
-    public ReturnType getReturnType() {
+    public TermType getReturnType() {
         return returnType;
     }
 

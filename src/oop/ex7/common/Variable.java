@@ -12,9 +12,9 @@ import oop.ex7.ValidationResult;
  */
 public class Variable implements Command {
 	
-	private VarType type;
+	private TermType type;
 	private String typeString;
-	private boolean isArray;
+//	private boolean isArray;
 	private String name;
 	private boolean inited;
 	
@@ -22,12 +22,12 @@ public class Variable implements Command {
 		
 		typeString = type;
 		
-		if ( type != null && type.endsWith( "[]" ) ) {
-			type = type.substring( 0, type.length() - 2 );
-			isArray = true;
-		}
-		
-		this.type = VarType.parse( type );
+//		if ( type != null && type.endsWith( "[]" ) ) {
+//			type = type.substring( 0, type.length() - 2 );
+//			isArray = true;
+//		}
+//		
+		this.type = TermType.parse( type );
 		this.name = name;
 		this.inited = false;
 		
@@ -55,7 +55,7 @@ public class Variable implements Command {
 	/**
 	 * @return the type
 	 */
-	public VarType getType() {
+	public TermType getType() {
 		return type;
 	}
 	
@@ -63,7 +63,8 @@ public class Variable implements Command {
 	 * @return the isArray
 	 */
 	public boolean isArray() {
-		return isArray;
+		//TODO maybe delete
+		return getType().isArray();
 	}
 	
 	/**

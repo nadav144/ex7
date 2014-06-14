@@ -8,7 +8,7 @@ import java.util.Set;
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
-import oop.ex7.common.VarType;
+import oop.ex7.common.TermType;
 
 public class ArrayLiteralExpression implements Expression {
 	
@@ -19,9 +19,11 @@ public class ArrayLiteralExpression implements Expression {
 		
 		expressions = new LinkedList< Expression >();
 		
-		if ( items.length == 1 && !items[0].trim().equals( "" ) ) {
-			Expression exp = ExpressionFactory.instance().create( items[0] );
-			expressions.add( exp );
+		if ( items.length == 1 ) {
+			if ( !items[0].trim().equals( "" ) ) {
+				Expression exp = ExpressionFactory.instance().create( items[0] );
+				expressions.add( exp );
+			}
 		}
 		else {
 			for ( String item : items ) {
@@ -38,7 +40,7 @@ public class ArrayLiteralExpression implements Expression {
 	 */
 	@Override
 	public ValidationResult isValid( Scope scope ) {
-		Set< VarType > t = new HashSet< VarType >();
+		Set< TermType > types = new HashSet< TermType >();
 		
 		ValidationResult result = new ValidationResult();
 		
@@ -46,24 +48,33 @@ public class ArrayLiteralExpression implements Expression {
 			
 			result.append( term.isValid( scope ) );
 			if ( result.getsuccessful() ) {
-				t.add( term.getType( scope ) );
+				types.add( term.getType( scope ) );
 			}
 		}
-		
-		boolean canAssign = true;
-		for ( VarType i : t ) {
-			canAssign = true;
-			for ( VarType j : t ) {
-				canAssign = canAssign && VarType.canAssignTo( i, j );
-			}
-			if ( canAssign ) {
-				break;
+		if ( types.size() != 0 ) {
+			TermType common =
+					TermType.getCommon( types.toArray( new TermType[0] ) );
+			if ( common == null ) {
+				result.setSuccessful( false );
+				result.append( "Array initializaer has mismatching types" );
 			}
 		}
-		if ( !canAssign ) {
-			result.setSuccessful( false );
-			result.append( "Array initializaer has mismatching types" );
-		}
+		//
+		// boolean canAssign = true;
+		// for ( VarType i : t ) {
+		// canAssign = true;
+		// for ( VarType j : t ) {
+		// canAssign = canAssign && VarType.canAssignTo( i, j );
+		// }
+		// if ( canAssign ) {
+		// break;
+		// }
+		// }
+		// if ( !canAssign ) {
+		// result.setSuccessful( false );
+		// result.append( "Array initializaer has mismatching types" );
+		// }
+		// TODO: delete comment
 		
 		return result;
 	}
@@ -95,26 +106,21 @@ public class ArrayLiteralExpression implements Expression {
 	 * @see oop.ex7.common.Expression#getType(oop.ex7.common.Scope)
 	 */
 	@Override
-	public VarType getType( Scope scope ) {
-		Set< VarType > t = new HashSet< VarType >();
+	public TermType getType( Scope scope ) {
+		Set< TermType > types = new HashSet< TermType >();
 		
 		for ( Expression term : getExpressions() ) {
-			t.add( term.getType( scope ) );
-			
+			types.add( term.getType( scope ) );
 		}
-		
-		boolean canAssign = true;
-		for ( VarType i : t ) {
-			canAssign = true;
-			for ( VarType j : t ) {
-				canAssign = canAssign && VarType.canAssignTo( i, j );
-			}
-			if ( canAssign ) {
-				return i;
-			}
+		TermType.VarType varType;
+		if ( types.size() == 0 ) {
+			varType = TermType.VarType.ANY;
 		}
-		
-		return null;
+		else {
+			varType =
+					TermType.getCommon( types.toArray( new TermType[0] ) ).getType();
+		}
+		return new TermType( varType, true );
 	}
 	
 	/**

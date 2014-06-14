@@ -4,13 +4,13 @@ package oop.ex7.commands;
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
-import oop.ex7.common.VarType;
+import oop.ex7.common.TermType;
 
 public class LiteralExpression implements Expression {
 	
-	private VarType type;
+	private TermType type;
 	
-	public LiteralExpression( VarType type ) {
+	public LiteralExpression( TermType type ) {
 		this.type = type;
 	}
 	
@@ -30,14 +30,14 @@ public class LiteralExpression implements Expression {
 	}
 	
 	@Override
-	public VarType getType( Scope scope ) {
+	public TermType getType( Scope scope ) {
 		return getType();
 	}
 	
 	/**
 	 * @return the type
 	 */
-	private VarType getType() {
+	private TermType getType() {
 		return type;
 	}
 	

@@ -4,7 +4,7 @@ package oop.ex7.commands;
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
-import oop.ex7.common.VarType;
+import oop.ex7.common.TermType;
 import oop.ex7.common.Variable;
 
 public class VariableLiteralExpression implements Expression {
@@ -45,7 +45,7 @@ public class VariableLiteralExpression implements Expression {
 	}
 	
 	@Override
-	public VarType getType( Scope scope ) {
+	public TermType getType( Scope scope ) {
         Variable var = scope.getVar(getName());
         if (var == null)
             return null;

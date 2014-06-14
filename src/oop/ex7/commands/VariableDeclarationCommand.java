@@ -14,11 +14,13 @@ public class VariableDeclarationCommand implements Command {
 	private Variable var;
 	private AssignmentExpression assign;
 	
-	public VariableDeclarationCommand( String type, String name ) throws Exception {
+	public VariableDeclarationCommand( String type, String name )
+			throws Exception {
 		this( type, name, null );
 	}
 	
-	public VariableDeclarationCommand( String type, String name, String rhs ) throws Exception {
+	public VariableDeclarationCommand( String type, String name, String rhs )
+			throws Exception {
 		var = new Variable( type, name );
 		if ( rhs != null ) {
 			assign =
@@ -34,7 +36,7 @@ public class VariableDeclarationCommand implements Command {
 		
 		result.append( getVar().isValid( scope ) );
 		if ( getAssign() != null ) {
-			result.append( getAssign().isValid(  scope ) );
+			result.append( getAssign().isValid( scope ) );
 		}
 		return result;
 	}
@@ -57,10 +59,12 @@ public class VariableDeclarationCommand implements Command {
 	public boolean isScope() {
 		return false;
 	}
-
-    @Override
-    public void updateScope(Scope scope) {
-        var.setInited( true );
-        scope.getVars().put( getVar().getName(), getVar() );
-    }
+	
+	@Override
+	public void updateScope( Scope scope ) {
+		if ( getAssign() != null ) {
+			var.setInited( true );
+		}
+		scope.getVars().put( getVar().getName(), getVar() );
+	}
 }

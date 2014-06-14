@@ -93,7 +93,7 @@ public class RegexUtils {
 			"^\\s*(true|false)\\s*$";
 	
 	public static final String METHOD_DECLARATION_PATTERN =
-			"^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{";
+			"^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{$";
 	
 	public static final String ARRAY_ASSIGNMENT_LITERAL =
 			"^\\s*\\{\\s*(.*)\\s*\\}\\s*$";

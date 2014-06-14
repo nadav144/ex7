@@ -6,7 +6,7 @@ import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.RegexUtils;
 import oop.ex7.common.Scope;
-import oop.ex7.common.VarType;
+import oop.ex7.common.TermType;
 
 public class MethodInvocationExpression implements Expression {
 	
@@ -59,8 +59,8 @@ public class MethodInvocationExpression implements Expression {
 		}
 		
 		for ( int i = 0 ; i < declatation.getParams().size() ; i++ ) {
-			VarType currDeclare = declatation.getParams().get( i ).getType();
-			VarType currInvoke = getParams().get( i ).getType( scope );
+			TermType currDeclare = declatation.getParams().get( i ).getType();
+			TermType currInvoke = getParams().get( i ).getType( scope );
 			if ( !currDeclare.equals( currInvoke ) ) {
 				result.setSuccessful( false );
 				result.append( String.format(
@@ -93,10 +93,10 @@ public class MethodInvocationExpression implements Expression {
      * @see oop.ex7.common.Expression#getType()
      */
 	@Override
-	public VarType getType( Scope scope ) {
+	public TermType getType( Scope scope ) {
 		MethodDeclaration declatation =
 				scope.getMainScope().getMethod( getName() );
-		return VarType.parse( declatation.getReturnType().name() );
+		return declatation.getReturnType();
 		
 	}
 	
