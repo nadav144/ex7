@@ -1,8 +1,6 @@
 package oop.ex7.commands;
 
-import oop.ex7.common.Command;
-import oop.ex7.common.RegexUtils;
-import oop.ex7.common.Scope;
+import oop.ex7.common.*;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
@@ -33,7 +31,16 @@ public class CommandFactory {
         } else if (expresion.matches(VAR_ASSIGNMENT_STATEMENT)){
             MatchResult res = RegexUtils.MatchSignle(VAR_ASSIGNMENT_STATEMENT, expresion);
             // TODO: OOOPS... what to do now?
-            throw new Exception();
+            String paramName = res.group(1);
+            Expression arrayAssignmentExpression = ExpressionFactory.instance().create(res.group(3));
+            Expression RHSexpression = ExpressionFactory.instance().create(res.group(4));
+            Variable var = scope.getVar(paramName);
+            if (arrayAssignmentExpression == null){
+                return new AssignmentExpression(var, RHSexpression);
+            } else {
+                return new ArrayAssignmentExpression(var, arrayAssignmentExpression, RHSexpression);
+            }
+
         }
         if (expresion.matches(IF_WHILE_STATEMENT)){
             MatchResult res = RegexUtils.MatchSignle(IF_WHILE_STATEMENT, expresion);

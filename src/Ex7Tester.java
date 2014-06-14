@@ -64,7 +64,7 @@ public class Ex7Tester {
 			 if (!line.equals(""))
 				 tests.add(new String[] {line.toString()});
 		 }
-		return tests.subList(0,1);
+		return tests;//.subList(0,1);
         //.subList(0,2);
 	}
 

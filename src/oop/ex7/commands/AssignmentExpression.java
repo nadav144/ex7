@@ -13,7 +13,7 @@ import oop.ex7.common.*;
  */
 public class AssignmentExpression implements Command {
 	
-	private Variable var;
+	protected Variable var;
 	private Expression expression;
 
 	
