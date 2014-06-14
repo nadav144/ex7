@@ -42,8 +42,10 @@ public class RegexUtils {
 	public static MatchResult MatchSignle( String pattern, String content ) {
 		Pattern regex = Pattern.compile( pattern, Pattern.MULTILINE );
 		Matcher matcher = regex.matcher( content );
-		matcher.lookingAt();
-		return matcher.toMatchResult();
+		if ( matcher.find() ) {
+			return matcher.toMatchResult();
+		}
+		return null;
 		
 	}
 	

@@ -82,6 +82,17 @@ public class ExpressionFactory {
 		
 		throw new Exception();
 	}
+	
+	public static void main( String[] args ) {
+		try{
+			Expression e=instance().create( "foo(5+b ) * d");
+			int i=6;
+			System.out.println("");
+		}
+		catch(Exception e){
+			System.out.println("");
+		}
+	}
 
 	
 }
