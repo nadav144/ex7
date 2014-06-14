@@ -3,6 +3,7 @@ package oop.ex7.commands;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
+import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.RegexUtils;
 import oop.ex7.common.VarType;
@@ -25,6 +26,13 @@ public class ExpressionFactory {
 	public Expression create( String expression ) throws Exception {
 		
 		MatchResult result;
+		if (Pattern.matches( RegexUtils.ARRAY_ASSIGNMENT_LITERAL, expression ) ) {
+			result =
+					RegexUtils.MatchSignle(
+							RegexUtils.ARRAY_ASSIGNMENT_LITERAL, expression );
+			
+			return new ArrayLiteralExpression( result.group( 1 ));
+		}
 		if ( Pattern.matches( RegexUtils.METHOD_INVOCATION_PATTERN, expression ) ) {
 			result =
 					RegexUtils.MatchSignle(
@@ -90,15 +98,26 @@ public class ExpressionFactory {
 	}
 	
 	public static void main( String[] args ) {
-		try{
-			Expression e=instance().create( "foo(5+b ) * d");
-			int i=6;
-			System.out.println("");
-		}
-		catch(Exception e){
-			System.out.println("");
-		}
+//		try {
+//			String ex="-56,  1 , 5+ -289  ";
+//			ArrayLiteralExpression a;
+//			System.out.println(ex);
+//			ValidationResult r=a.isValid( null );
+//			System.out.println(a.getType( null ));
+//		}
+//		catch ( Exception e ) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		// try{
+		// Expression e=instance().create( "foo(5+b ) * d");
+		// int i=6;
+		// System.out.println("");
+		// }
+		// catch(Exception e){
+		// System.out.println("");
+		// }
 	}
-
 	
 }

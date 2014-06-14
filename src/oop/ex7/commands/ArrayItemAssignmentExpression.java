@@ -9,7 +9,7 @@ import oop.ex7.common.Variable;
 /**
  * Created by Nadav on 14/06/14.
  */
-public class ArrayAssignmentExpression extends AssignmentExpression {
+public class ArrayItemAssignmentExpression extends AssignmentExpression {
 
     private Expression positionExpression;
 
@@ -17,7 +17,7 @@ public class ArrayAssignmentExpression extends AssignmentExpression {
      * @param var
      * @param expression
      */
-    public ArrayAssignmentExpression(Variable var, Expression position, Expression expression) {
+    public ArrayItemAssignmentExpression(Variable var, Expression position, Expression expression) {
         super(var, expression);
         positionExpression = position;
     }

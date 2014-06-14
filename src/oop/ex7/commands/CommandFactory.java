@@ -38,7 +38,7 @@ public class CommandFactory {
             if (arrayAssignmentExpression == null){
                 return new AssignmentExpression(var, RHSexpression);
             } else {
-                return new ArrayAssignmentExpression(var, arrayAssignmentExpression, RHSexpression);
+                return new ArrayItemAssignmentExpression(var, arrayAssignmentExpression, RHSexpression);
             }
 
         }

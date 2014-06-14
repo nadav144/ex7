@@ -31,7 +31,7 @@ public class RegexUtils {
 		
 		for ( String string : content ) {
 			Matcher matcher = regex.matcher( string );
-			if (matcher.find() ) {
+			if ( matcher.find() ) {
 				returnValue.add( matcher.toMatchResult() );
 			}
 		}
@@ -43,7 +43,7 @@ public class RegexUtils {
 		Pattern regex = Pattern.compile( pattern, Pattern.MULTILINE );
 		Matcher matcher = regex.matcher( content );
 		if ( matcher.find() ) {
-		return matcher.toMatchResult();
+			return matcher.toMatchResult();
 		}
 		return null;
 		
@@ -67,7 +67,7 @@ public class RegexUtils {
 	 * group 1 - lhs, group 2 - operator, group 3 - rhs
 	 */
 	public static final String OPERATION_PATTERN =
-			"^(.*)([\\+\\*\\-/])(.*)\\s*$";
+			"^(.+)([\\+\\*\\-/])(.+)\\s*$";
 	/**
 	 * group 1 - string
 	 */
@@ -91,6 +91,10 @@ public class RegexUtils {
 	 */
 	public static final String BOOLEAN_LITERAL_PATTERN =
 			"^\\s*(true|false)\\s*$";
-
-    public static final String METHOD_DECLARATION_PATTERN = "^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{";
+	
+	public static final String METHOD_DECLARATION_PATTERN =
+			"^\\s*(\\w*)\\s*(\\w*)\\s*\\((.*)\\)\\s*\\{";
+	
+	public static final String ARRAY_ASSIGNMENT_LITERAL =
+			"^\\s*\\{\\s*(.*)\\s*\\}\\s*$";
 }
