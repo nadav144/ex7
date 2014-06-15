@@ -15,8 +15,11 @@ public class ArrayLiteralExpression implements Expression {
 	private List< Expression > expressions;
 	
 	public ArrayLiteralExpression( String params ) throws Exception {
+        // this is invalid syntax, we must fail it.
+        if (params.endsWith(","))
+            throw new Exception("invalid array assignment");
+
 		String[] items = params.split( "," );
-		
 		expressions = new LinkedList< Expression >();
 		
 		if ( items.length == 1 ) {

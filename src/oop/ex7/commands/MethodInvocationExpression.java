@@ -17,11 +17,12 @@ public class MethodInvocationExpression implements Expression {
 		this.name = name;
 		
 		this.params = new LinkedList< Expression >();
-		
-		for ( String param : params.split( "," ) ) {
-			this.params.add( ExpressionFactory.instance().create( param ) );
-		}
-		
+
+        if (!params.trim().equals(""))
+            for ( String param : params.split( "," ) ) {
+                this.params.add( ExpressionFactory.instance().create( param ) );
+            }
+
 	}
 	
 	/*
