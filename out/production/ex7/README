@@ -1,0 +1,30 @@
+nadav144
+
+
+== Design Description ==
+there are three sub packages in the project:
+1. Commands - contains classes that handle command file such as parser and section.
+2. Filters = Contains all the filters in the projects, Factory and related exceptions.
+3. Orders - Contains all the orders in the project, Factory and replate exceptions.
+
+Main excpetion types, and the main Manager and executer, MyFileScript classes can be found under the main package.
+
+the design of the project is as given in class. it contains a main manager that impliments all the main logic and
+execution of command files. contains parser and factory as in the Factory design pattern to read and parse the command
+files.
+
+it was importent to keep the parser as the sole part of the project who is taking part in the file format. each one is
+aware of the relevant parts to him only. for example, each filter is inchange to parse the parameter him self, as he
+see fit, and throw exception if needed.
+
+all filters implements IFilter, who has a main method (does file pass filter) and all orders implement IOrder.
+
+Order execution is beeing done using Arrays, and the defult sort method. each order is implementing Comparator<File> so
+we can use the out of the box sort method. plus, this leaves the order to handle the specific order concept only
+and not other sort mechanizem.
+
+Exception were catched and handled where they needed:
+- Filter and Order creation order handled by the parser since he is incharge of building the section from the file. the
+    parser would create the defualt filter or order in case of an exception. plus, he will register the warning of the
+    specific section.
+- Catastrophic Errors were handled by the manager or the main. and would cuased the program to exit.
