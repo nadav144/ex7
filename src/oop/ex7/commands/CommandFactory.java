@@ -30,7 +30,6 @@ public class CommandFactory {
             return new VariableDeclarationCommand(typestring, res.group(3), res.group(4));
         } else if (expresion.matches(VAR_ASSIGNMENT_STATEMENT)){
             MatchResult res = RegexUtils.MatchSignle(VAR_ASSIGNMENT_STATEMENT, expresion);
-            // TODO: OOOPS... what to do now?
             String paramName = res.group(1);
             Expression arrayAssignmentExpression = ExpressionFactory.instance().create(res.group(3));
             Expression RHSexpression = ExpressionFactory.instance().create(res.group(4));
@@ -50,7 +49,7 @@ public class CommandFactory {
         else if (expresion.matches(RegexUtils.METHOD_DECLARATION_PATTERN)){
             MatchResult res = RegexUtils.MatchSignle(RegexUtils.METHOD_DECLARATION_PATTERN, expresion);
             // Get the name and return the command from the main scope
-            String methodName = res.group(2);
+            String methodName = res.group(3);
             return scope.getMainScope().getMethod(methodName);
 
         } else if (expresion.matches(METHOD_RETURN_STATEMENT)){

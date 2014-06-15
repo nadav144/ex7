@@ -23,7 +23,7 @@ public class ArrayAssignmentExpression extends AssignmentExpression {
     }
 
     @Override
-    public ValidationResult isValid(Scope scope) {
+    public ValidationResult isValid(Scope scope) throws Exception{
         ValidationResult res = super.isValid(scope);
         if (res.getsuccessful()){
             res.append(positionExpression.isValid(scope));

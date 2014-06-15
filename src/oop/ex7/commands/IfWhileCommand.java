@@ -30,7 +30,7 @@ public class IfWhileCommand implements Command {
     }
 
     @Override
-    public ValidationResult isValid(Scope scope) {
+    public ValidationResult isValid(Scope scope) throws Exception{
         ValidationResult res = new ValidationResult();
         res.append(booleanExpresion.isValid(scope));
         if (res.getsuccessful() && booleanExpresion.getType(scope) != VarType.BOOLEAN)

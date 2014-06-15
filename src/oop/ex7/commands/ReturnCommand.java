@@ -20,7 +20,7 @@ public class ReturnCommand implements Command {
             isVoid = true;
     }
     @Override
-    public ValidationResult isValid(Scope scope) {
+    public ValidationResult isValid(Scope scope) throws Exception{
         ValidationResult res = new ValidationResult();
         if (!isVoid){
             res.append(expression.isValid(scope));

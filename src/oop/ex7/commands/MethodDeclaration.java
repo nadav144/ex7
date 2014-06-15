@@ -14,12 +14,12 @@ public class MethodDeclaration implements Command {
 	private ReturnType returnType;
 	private String[] declaration;
 	
-	public MethodDeclaration( MatchResult declaration ) {
+	public MethodDeclaration( MatchResult declaration ) throws Exception{
 		this.declaration = new String[3];
 		
-		this.declaration[0] = declaration.group( 1 );
-		this.declaration[1] = declaration.group( 2 );
-		this.declaration[2] = declaration.group( 3 );
+		this.declaration[0] = (declaration.group(2) == null) ? declaration.group( 1 ) : declaration.group(1) + declaration.group(2);
+		this.declaration[1] = declaration.group( 3 );
+		this.declaration[2] = declaration.group( 4 );
 		
 		returnType = ReturnType.parse( this.declaration[0] );
 		
@@ -33,8 +33,9 @@ public class MethodDeclaration implements Command {
             List< MatchResult > matchResults =
                     RegexUtils.Match(RegexUtils.PARAM_PATTERN, params);
             for ( MatchResult result : matchResults ) {
-
-                this.params.add( new Variable( result.group( 1 ), result.group( 2 ) ) );
+                boolean isArray = !(result.group(2).isEmpty());
+                this.params.add( new Variable( result.group( 1 ), isArray, result.group( 3 ) ) );
+                this.params.getLast().setInited(true);
             }
         }
 		

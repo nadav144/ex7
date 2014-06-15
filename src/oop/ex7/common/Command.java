@@ -7,7 +7,7 @@ import oop.ex7.ValidationResult;
  */
 public interface Command{
 
-	public ValidationResult isValid(Scope scope);
+	public ValidationResult isValid(Scope scope) throws Exception;
     public boolean isScope();
     public void updateScope(Scope scope);
 }

@@ -14,24 +14,24 @@ public class Variable implements Command {
 	
 	private VarType type;
 	private String typeString;
-	private boolean isArray;
 	private String name;
 	private boolean inited;
 	
 	public Variable( String type, String name ) {
 		
 		typeString = type;
-		
-		if ( type != null && type.endsWith( "[]" ) ) {
-			type = type.substring( 0, type.length() - 2 );
-			isArray = true;
-		}
-		
+
 		this.type = VarType.parse( type );
 		this.name = name;
 		this.inited = false;
 		
 	}
+
+    public Variable( String type, boolean isArray, String name ) {
+        this(type, name);
+        this.getType().setArray(isArray);
+    }
+
 	
 	/*
 	 * (non-Javadoc)
@@ -63,7 +63,7 @@ public class Variable implements Command {
 	 * @return the isArray
 	 */
 	public boolean isArray() {
-		return isArray;
+		return getType().isArray();
 	}
 	
 	/**

@@ -29,7 +29,7 @@ public class VariableDeclarationCommand implements Command {
 	}
 	
 	@Override
-	public ValidationResult isValid( Scope scope ) {
+	public ValidationResult isValid( Scope scope ) throws Exception{
 		ValidationResult result = new ValidationResult();
 		
 		result.append( getVar().isValid( scope ) );

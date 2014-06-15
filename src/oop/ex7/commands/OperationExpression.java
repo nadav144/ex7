@@ -55,7 +55,7 @@ public class OperationExpression implements Expression {
 	 * oop.ex7.common.Scope)
 	 */
 	@Override
-	public ValidationResult isValid(Scope scope ) {
+	public ValidationResult isValid(Scope scope ) throws Exception{
 		ValidationResult result = new ValidationResult();
 		
 		if ( getOpType() == null ) {

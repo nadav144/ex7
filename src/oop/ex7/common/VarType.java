@@ -3,11 +3,34 @@ package oop.ex7.common;
 
 public enum VarType {
 	INT, DOUBLE, STRING, CHAR, BOOLEAN;
+
+    private VarType(){
+        isArray = false;
+    }
+
+    private boolean isArray;
+
+    public void setArray(boolean arr){
+        isArray = arr;
+    }
+
+    public boolean isArray(){
+        return isArray;
+    }
 	
 	public static VarType parse( String source ) {
-		for ( VarType type : VarType.values() ) {
+
+        boolean isArray = false;
+        if ( source != null && source.endsWith( "[]" ) ) {
+            source = source.substring( 0, source.length() - 2 );
+            isArray = true;
+        }
+
+        for ( VarType type : VarType.values() ) {
 			if ( type.toString().equalsIgnoreCase( source ) ) {
-				return type;
+				VarType typeToReturn = type;
+                typeToReturn.setArray(isArray);
+                return typeToReturn;
 			}
 			
 		}
