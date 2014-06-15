@@ -22,16 +22,6 @@ public class VariableLiteralExpression implements Expression {
 		this.name = name;
 	}
 	
-	@Override
-	public boolean isScope() {
-		return false;
-	}
-
-    @Override
-    public void updateScope(Scope scope) {
-
-    }
-
     @Override
 	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();

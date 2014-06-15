@@ -3,16 +3,12 @@ package oop.ex7.commands;
 import java.util.LinkedList;
 
 import oop.ex7.Exceptions.ExpressionSyntaxException;
-import oop.ex7.common.Expression;
-import oop.ex7.common.RegexUtils;
-import oop.ex7.common.Scope;
-import oop.ex7.common.TermType;
-import oop.ex7.common.ValidationResult;
+import oop.ex7.common.*;
 
 /**
  * Represent a method invocation expression
  */
-public class MethodInvocationExpression implements Expression {
+public class MethodInvocationExpression implements Expression, Command {
 	
 	private LinkedList< Expression > params;
 	private String name;

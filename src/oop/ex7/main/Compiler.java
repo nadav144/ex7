@@ -90,7 +90,7 @@ public class Compiler {
 	 *            the scope the houses the methods
 	 */
 	private static ValidationResult preProcessMethods( String content,
-			MainScope mainScope ) throws CommandSyntaxException {
+			MainScope mainScope ) throws CommandSyntaxException{
 		ValidationResult result = new ValidationResult();
 		// Search for method declarations
 		List< MatchResult > results =

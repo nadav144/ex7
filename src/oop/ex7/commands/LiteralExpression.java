@@ -37,17 +37,6 @@ public class LiteralExpression implements Expression {
             this.isPositive = PositiveEnum.NEGATIVE;
     }
 	
-	@Override
-	public boolean isScope() {
-		return false;
-	}
-
-    @Override
-    public void updateScope(Scope scope) {
-
-    }
-
-    @Override
 	public ValidationResult isValid(Scope scope ) {
 		return new ValidationResult();
 	}
