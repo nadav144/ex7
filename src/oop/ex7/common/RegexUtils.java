@@ -83,11 +83,11 @@ public class RegexUtils {
 	 * group 1 - double
 	 */
 	public static final String DOUBLE_LITERAL_PATTERN =
-			"^\\s*-?\\s*(\\d+\\.?\\d*)\\s*$";
+                "^\\s*(-?\\s*\\d+\\.?\\d*)\\s*$";
 	/**
 	 * group 1 - int value
 	 */
-	public static final String INT_LITERAL_PATTERN = "^\\s*-?(\\s*\\d+)\\s*$";
+	public static final String INT_LITERAL_PATTERN = "^\\s*(-?\\s*\\d+)\\s*$";
 	/**
 	 * group 1 - bool
 	 */
