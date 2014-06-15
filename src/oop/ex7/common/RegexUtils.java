@@ -67,7 +67,7 @@ public class RegexUtils {
 	 * group 1 - lhs, group 2 - operator, group 3 - rhs
 	 */
 	public static final String OPERATION_PATTERN =
-			"^(.+)([\\+\\*\\-/])(.+)\\s*$";
+			"^([-,+,*]*[^-,+,*,]+)([\\+\\*\\-/])(.+)\\s*$";
 	/**
 	 * group 1 - string
 	 */
