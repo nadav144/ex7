@@ -26,23 +26,39 @@ public class ArrayItemAssignmentExpression extends AssignmentExpression {
 	
 	@Override
 	public ValidationResult isValid( Scope scope ) {
-		ValidationResult res = super.isValid( scope );
+		ValidationResult result = new ValidationResult();// = super.isValid(
+															// scope );
 		
-		if ( !var.isInited() ) {
-			res.fail( "Array must be initialized before items can be assigned." );
-		}
+		result.append( getVar().isValid( scope ) );
+		result.append( getExpression().isValid( scope ) );
 		
-		if ( res.getsuccessful() ) {
-			res.append( positionExpression.isValid( scope ) );
-			if ( res.getsuccessful() && !var.isArray() ) {
-				res.fail( "Array assignment into not array variable is not allowed" );
+		if ( result.getsuccessful() ) {
+			
+			if ( !TermType.VarType.canAssignTo( getVar().getType().getType(),
+					getExpression().getType( scope ).getType() ) ) {
+				result.fail( String.format(
+						"Invalid assignment type. Expected: '%s', Actual: '%s'",
+						getVar().getType().getType(), getExpression().getType(
+								scope ).getType() ) );
+				
 			}
-			if ( res.getsuccessful()
+		}
+//		
+//		if ( !var.isInited() ) {
+//			result.fail( "Array must be initialized before items can be assigned." );
+//		}
+		
+		if ( result.getsuccessful() ) {
+			result.append( positionExpression.isValid( scope ) );
+			if ( result.getsuccessful() && !var.isArray() ) {
+				result.fail( "Array assignment into not array variable is not allowed" );
+			}
+			if ( result.getsuccessful()
 					&& positionExpression.getType( scope ).getType() != TermType.VarType.INT ) {
-				res.fail( "Array position assignment must be an int type" );
+				result.fail( "Array position assignment must be an int type" );
 			}
 		}
 		
-		return res;
+		return result;
 	}
 }

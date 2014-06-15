@@ -41,8 +41,7 @@ public class AssignmentExpression implements Command {
 			
 			if ( !TermType.canAssignTo( getVar().getType(),
 					getExpression().getType( scope ) ) ) {
-				result.setSuccessful( false );
-				result.append( String.format(
+				result.fail(  String.format(
 						"Invalid assignment type. Expected: '%s', Actual: '%s'",
 						getVar().getType(), getExpression().getType( scope ) ) );
 				
@@ -70,14 +69,14 @@ public class AssignmentExpression implements Command {
 	/**
 	 * @return the var
 	 */
-	private Variable getVar() {
+	protected Variable getVar() {
 		return var;
 	}
 	
 	/**
 	 * @return the expression
 	 */
-	private Expression getExpression() {
+	protected Expression getExpression() {
 		return expression;
 	}
 	
