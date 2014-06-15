@@ -8,12 +8,19 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.List;
 
+/**
+ * this is the main executable for the Simplified Java Compiler
+ */
 public class Sjavac {
 
+    /**
+     * Execte the compiler. result will be printed.
+     * @param args string args containg the SJAVA's path file to check
+     */
     public static void main(String[] args) {
-	// write your code here
-
         try{
+            if (args.length != 1)
+                throw new IllegalArgumentException("Execution parameters should contain a single parameter only");
             String fileName = args[0] ;
             File file = new File(fileName);
 
