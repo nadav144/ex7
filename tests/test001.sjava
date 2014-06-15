@@ -1,1 +1,3 @@
-double a = -5.55;
+int[] foo(int[] a)	{
+return a;
+}
