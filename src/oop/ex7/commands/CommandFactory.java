@@ -1,6 +1,7 @@
 
 package oop.ex7.commands;
 
+import oop.ex7.Exceptions.CommandSyntaxException;
 import oop.ex7.common.*;
 
 import java.io.SyncFailedException;
@@ -80,7 +81,12 @@ public class CommandFactory {
 		}
         // Method invoke command
 		else if ( commandstr.matches( RegexUtils.METHOD_INVOCATION_PATTERN ) ) {
-			return (Command) ExpressionFactory.instance().create( commandstr );
+            Expression expression = ExpressionFactory.instance().create( commandstr );
+            try{
+			    return (Command) expression;
+            } catch (Exception ex){
+                throw new CommandSyntaxException("Cannot create the method invocation command");
+            }
 		}
         // Return (value) command
 		else if ( commandstr.matches(RegexUtils.METHOD_RETURN_STATEMENT) ) {
