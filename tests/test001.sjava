@@ -1,7 +1,1 @@
-int foo(int a){
-return goo()        +3;
-}
-
-int goo(){
-return 9;
-}
+int a = 5+-6;
