@@ -36,9 +36,10 @@ public class MethodDeclaration implements Command {
 			List< MatchResult > matchResults =
 					RegexUtils.Match( RegexUtils.PARAM_PATTERN, params );
 			for ( MatchResult result : matchResults ) {
-				
-				this.params.add( new Variable( result.group( 1 ),
-						result.group( 2 ) ) );
+				Variable param= new Variable( result.group( 1 ),
+						result.group( 2 ) ) ;
+				param.setInited( true );
+				this.params.add(param);
 			}
 		}
 		else {
