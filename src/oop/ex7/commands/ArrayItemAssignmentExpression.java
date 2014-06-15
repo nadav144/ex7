@@ -2,10 +2,7 @@
 package oop.ex7.commands;
 
 import oop.ex7.ValidationResult;
-import oop.ex7.common.Expression;
-import oop.ex7.common.Scope;
-import oop.ex7.common.TermType;
-import oop.ex7.common.Variable;
+import oop.ex7.common.*;
 
 /**
  * Created by Nadav on 14/06/14.
@@ -53,9 +50,14 @@ public class ArrayItemAssignmentExpression extends AssignmentExpression {
 			if ( result.getsuccessful() && !var.isArray() ) {
 				result.fail( "Array assignment into not array variable is not allowed" );
 			}
-			if ( result.getsuccessful()
-					&& positionExpression.getType( scope ).getType() != TermType.VarType.INT ) {
-				result.fail( "Array position assignment must be an int type" );
+			if ( result.getsuccessful()){
+					if (positionExpression.getType( scope ).getType() != TermType.VarType.INT )
+				        result.fail( "Array position assignment must be an int type" );
+                    if (result.getsuccessful() && positionExpression.getClass() == LiteralExpression.class){
+                        if (((LiteralExpression)positionExpression).isPositive() == PositiveEnum.NEGATIVE){
+                            result.fail("Array item position must be a positive number");
+                        }
+                    }
 			}
 		}
 		
