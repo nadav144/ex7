@@ -97,7 +97,7 @@ public class TermType {
 	}
 	
 	public static TermType getCommon( TermType[] terms ) {
-		Set< TermType > distinctTerms = new HashSet<>();
+		Set< TermType > distinctTerms = new HashSet<TermType>();
 		for ( TermType term : terms ) {
 			distinctTerms.add( term );
 		}
