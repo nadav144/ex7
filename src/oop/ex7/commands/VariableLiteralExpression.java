@@ -55,7 +55,7 @@ public class VariableLiteralExpression implements Expression {
 	/**
 	 * @return the name
 	 */
-	private String getName() {
+	public String getName() {
 		return name;
 	}
 	

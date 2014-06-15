@@ -26,12 +26,12 @@ public class ExpressionFactory {
 	public Expression create( String expression ) throws Exception {
 		expression = expression.trim();
 		MatchResult result;
-		if (Pattern.matches( RegexUtils.ARRAY_ASSIGNMENT_LITERAL, expression ) ) {
+		if ( Pattern.matches( RegexUtils.ARRAY_ASSIGNMENT_LITERAL, expression ) ) {
 			result =
 					RegexUtils.MatchSignle(
 							RegexUtils.ARRAY_ASSIGNMENT_LITERAL, expression );
 			
-			return new ArrayLiteralExpression( result.group( 1 ));
+			return new ArrayLiteralExpression( result.group( 1 ) );
 		}
 		if ( Pattern.matches( RegexUtils.METHOD_INVOCATION_PATTERN, expression ) ) {
 			result =
@@ -42,9 +42,10 @@ public class ExpressionFactory {
 					result.group( 2 ) );
 		}
 		if ( Pattern.matches( RegexUtils.OPERATION_PATTERN, expression ) ) {
-			result =RegexUtils.MatchSignle( RegexUtils.OPERATION_PATTERN,
+			result =
+					RegexUtils.MatchSignle( RegexUtils.OPERATION_PATTERN,
 							expression );
-
+			
 			return new OperationExpression( result.group( 1 ),
 					result.group( 2 ), result.group( 3 ) );
 			
@@ -53,31 +54,43 @@ public class ExpressionFactory {
 			result =
 					RegexUtils.MatchSignle( RegexUtils.STRING_LITERAL_PATTERN,
 							expression );
-			return new LiteralExpression( new TermType(TermType.VarType.STRING ));
+			return new LiteralExpression(
+					new TermType( TermType.VarType.STRING ) );
 		}
 		if ( Pattern.matches( RegexUtils.CHAR_LITERAL_PATTERN, expression ) ) {
 			result =
 					RegexUtils.MatchSignle( RegexUtils.CHAR_LITERAL_PATTERN,
 							expression );
-			return new LiteralExpression( new TermType(TermType.VarType.CHAR ));
+			return new LiteralExpression( new TermType( TermType.VarType.CHAR ) );
 		}
 		if ( Pattern.matches( RegexUtils.DOUBLE_LITERAL_PATTERN, expression ) ) {
 			result =
 					RegexUtils.MatchSignle( RegexUtils.DOUBLE_LITERAL_PATTERN,
 							expression );
-            try{
-                Integer.parseInt(result.group().trim());
-                return new LiteralExpression(new TermType(TermType.VarType.INT));
-            }
-            catch (Exception ex){
-                return new LiteralExpression(new TermType( TermType.VarType.DOUBLE) );
-            }
+			try {
+				Integer.parseInt( result.group().trim() );
+				return new LiteralExpression( new TermType(
+						TermType.VarType.INT ) );
+			}
+			catch ( Exception ex ) {
+				return new LiteralExpression( new TermType(
+						TermType.VarType.DOUBLE ) );
+			}
 		}
 		if ( Pattern.matches( RegexUtils.BOOLEAN_LITERAL_PATTERN, expression ) ) {
 			result =
 					RegexUtils.MatchSignle( RegexUtils.BOOLEAN_LITERAL_PATTERN,
 							expression );
-			return new LiteralExpression( new TermType(TermType.VarType.BOOLEAN ));
+			return new LiteralExpression( new TermType(
+					TermType.VarType.BOOLEAN ) );
+		}
+		if ( Pattern.matches( RegexUtils.ARRAY_VARIABLE_NAME_PATTERN,
+				expression ) ) {
+			result =
+					RegexUtils.MatchSignle(
+							RegexUtils.ARRAY_VARIABLE_NAME_PATTERN, expression );
+			return new ArrayItemLiteralExpression( result.group( 1 ),
+					create( result.group( 2 ) ) );
 		}
 		if ( Pattern.matches( RegexUtils.VARIABLE_NAME_PATTERN, expression ) ) {
 			result =
@@ -96,28 +109,5 @@ public class ExpressionFactory {
 		
 		throw new Exception();
 	}
-	
-	public static void main( String[] args ) {
-//		try {
-//			String ex="-56,  1 , 5+ -289  ";
-//			ArrayLiteralExpression a;
-//			System.out.println(ex);
-//			ValidationResult r=a.isValid( null );
-//			System.out.println(a.getType( null ));
-//		}
-//		catch ( Exception e ) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
-		// try{
-		// Expression e=instance().create( "foo(5+b ) * d");
-		// int i=6;
-		// System.out.println("");
-		// }
-		// catch(Exception e){
-		// System.out.println("");
-		// }
-	}
-	
 }
