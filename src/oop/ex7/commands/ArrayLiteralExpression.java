@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import oop.ex7.Exceptions.CommandSyntaxException;
 import oop.ex7.Exceptions.ExpressionSyntaxException;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;

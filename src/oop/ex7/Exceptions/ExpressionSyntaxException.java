@@ -5,7 +5,9 @@ package oop.ex7.Exceptions;
  * */
 public class ExpressionSyntaxException extends Exception {
 
-    public ExpressionSyntaxException(String message){
+	private static final long serialVersionUID = 1L;
+
+	public ExpressionSyntaxException(String message){
         super(message);
     }
 }

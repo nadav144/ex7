@@ -15,8 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represent the main compiler. this class will compile the file given using the factories and the command validation
- * method. 
+ * Represent the main compiler. this class will compile the file given using the
+ * factories and the command validation method.
  */
 public class Compiler {
 	
@@ -56,27 +56,27 @@ public class Compiler {
 	/**
 	 * Compiles the file and returns the results
 	 * 
-	 * @param content
+	 * @param code
 	 *            the file to compile
 	 * @return the validation results
 	 * @throws Exception
 	 *             if any illegal structures appear in the code
 	 */
-	public static ValidationResult parse( String content ) throws Exception {
+	public static ValidationResult compile( String code ) throws Exception {
 		
 		// Create the main scope first
 		MainScope mainScope = new MainScope();
 		ValidationResult preprocessResult = new ValidationResult();
-		preprocessResult.append( preProcessMethods( content, mainScope ) );
+		preprocessResult.append( preProcessMethods( code, mainScope ) );
 		
-		preprocessResult.append( processGlobalVariables( mainScope, content ) );
+		preprocessResult.append( processGlobalVariables( mainScope, code ) );
 		if ( !preprocessResult.getSuccessful() ) {
 			return preprocessResult;
 		}
 		
 		// Start parsing line by line
 		LineNumberReader reader =
-				new LineNumberReader( new StringReader( content ) );
+				new LineNumberReader( new StringReader( code ) );
 		return parseScope( reader, mainScope );
 		
 	}
@@ -90,7 +90,7 @@ public class Compiler {
 	 *            the scope the houses the methods
 	 */
 	private static ValidationResult preProcessMethods( String content,
-			MainScope mainScope ) throws CommandSyntaxException{
+			MainScope mainScope ) throws CommandSyntaxException {
 		ValidationResult result = new ValidationResult();
 		// Search for method declarations
 		List< MatchResult > results =

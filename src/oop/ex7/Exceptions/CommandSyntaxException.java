@@ -5,7 +5,9 @@ package oop.ex7.Exceptions;
  */
 public class CommandSyntaxException extends Exception {
 
-    public CommandSyntaxException(String message){
+	private static final long serialVersionUID = 1L;
+
+	public CommandSyntaxException(String message){
         super(message);
     }
 }

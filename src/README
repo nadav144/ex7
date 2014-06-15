@@ -1,24 +1,5 @@
 nadav144
-
-
-== Design Description ==
-there are three sub packages in the project:
-1. Commands - contains classes that handle command file such as parser and section.
-2. Filters = Contains all the filters in the projects, Factory and related exceptions.
-3. Orders - Contains all the orders in the project, Factory and replate exceptions.
-
-
-Error Handling:
----------------
-We divided errors into two type:
-The first are 'critical' errors such as lines containing gibberish and in
-general statements that did not fit into any of the optional legal patterns.
-Such errors were thrown via exceptions tailored to our project, and later
-wrapped with a ValidationResult.
-
-The second type were language errors (such as invalid assignments etc) which
-were returned using the ValidationResult class, without using exceptions, since
-we didn't need them.
+jirsch
 
 OO Design:
 ----------
@@ -36,12 +17,12 @@ In order to evaluate an expression such as 5+a, we need to know what 'a' is,
 and that is contained in the scope. Each scope has a collection of the variables
 declared within it (including names, types and initialization status).
 
-The parser class receives the string representation of the file being compiled.
+The compiler class receives the string representation of the file being compiled.
 First, it extracts the method and global variables metadata into the MainScope,
-and then it parses the file line by line. Whenever we reach a new scope we carry
-on recursively (method containing a loop containing a loop containing a 
-condition etc.). Each line is validated against its containing scope, until we
-encounter an error or we finish the compilation. 
+and then it parses the file line by line using the CommandFactory. Whenever we 
+reach a new scope we carry on recursively (method containing a loop containing a
+loop containing a condition etc.). Each line is validated against its containing
+scope, until we encounter an error or we finish the compilation. 
 
 Ruled out options:
 ------------------
@@ -50,44 +31,48 @@ the OS runs a program, but when we tried to implement it, it felt a bit awkward
 and we found ourselves having to pass it to many layers of code because it was
 needed somewhere. We eventually decided to use the Scope class instead.
 
-It took us a while to figure out who will do any work other than the Parser.
-Eventually we divided responsibility such that the parser only knows patterns
+It took us a while to figure out who will do any work other than the Compiler.
+Eventually we divided responsibility such that the compiler only knows patterns
 and the commands validate themselves using the scope.
 
 It also took us some time to distinguish between a general command, and the more
 specific case of an expression and to see that they are two different things.
 Since we separated them, development was much easier. 
  
- Adding new types:
- -----------------
- We'd need to add the type to the TermType class (to indicate legal assignments)
- and add a specific regex pattern to ExpressionFactory that captures it. 
- Finally, we'll need a new LiteralExpression class to validate it, and thats it.
+Adding new types:
+-----------------
+We'd need to add the type to the TermType class (to indicate legal assignments)
+and add a specific regex pattern to ExpressionFactory that captures it. 
+Finally, we'll need a new LiteralExpression class to validate it, and thats it.
  
- If-Else block
- -------------
- Right now, when we encounter sub-scopes (such as a loop in a method) we process
- the inner scope, but discard it afterwards. In order to evaluate if-else scopes
- we'll need to retain the previous   
+If-Else block
+-------------
+Right now, when we encounter sub-scopes (such as a loop in a method) we process
+the inner scope, but discard it afterwards. In order to evaluate if-else scopes
+we'll need to retain the previous sibling scope processed and make sure it is
+and if-scope. Other than that, its business as usual.
 
-Main excpetion types, and the main Manager and executer, MyFileScript classes can be found under the main package.
+Error Handling:
+---------------
+We divided errors into two type:
+The first are 'critical' errors such as lines containing gibberish and in
+general statements that did not fit into any of the optional legal patterns.
+Such errors were thrown via exceptions tailored to our project, and later
+wrapped with a ValidationResult.
 
-the design of the project is as given in class. it contains a main manager that impliments all the main logic and
-execution of command files. contains parser and factory as in the Factory design pattern to read and parse the command
-files.
+The second type were language errors (such as invalid assignments etc) which
+were returned using the ValidationResult class, without using exceptions, since
+the errors are well defined, and exceptions is an expensive mechanism.
+ 
+Regex
+------
+We actually have no two main regex. We have plenty, each capturing a specific
+Command \ Expression. Two for example are:
+ 
+(int|double|String|boolean|char)\\s*(\\[\\s*\\])?\\s*(\\w*)\\s*(?:=(.*))?\\s*;  
+which captures the declaration of a variable. It must contain one of the 
+accepted types, an optional array indicator, a name and an optional assignment.
 
-it was importent to keep the parser as the sole part of the project who is taking part in the file format. each one is
-aware of the relevant parts to him only. for example, each filter is inchange to parse the parameter him self, as he
-see fit, and throw exception if needed.
-
-all filters implements IFilter, who has a main method (does file pass filter) and all orders implement IOrder.
-
-Order execution is beeing done using Arrays, and the defult sort method. each order is implementing Comparator<File> so
-we can use the out of the box sort method. plus, this leaves the order to handle the specific order concept only
-and not other sort mechanizem.
-
-Exception were catched and handled where they needed:
-- Filter and Order creation order handled by the parser since he is incharge of building the section from the file. the
-    parser would create the defualt filter or order in case of an exception. plus, he will register the warning of the
-    specific section.
-- Catastrophic Errors were handled by the manager or the main. and would cuased the program to exit.
+^\\s*([a-zA-Z]\\w*)\\s*\\((.*)\\)\\s*;?
+which describes a method invocation. It imposes the conditions on the method
+name, and forces the existence of brackets. 

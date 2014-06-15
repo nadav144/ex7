@@ -34,7 +34,7 @@ public class Sjavac {
 
 			String Content = Compiler.truncAndFixLines(lines);
 			
-			ValidationResult res = Compiler.parse(Content);
+			ValidationResult res = Compiler.compile(Content);
 
             if (res.getSuccessful()){
                 System.out.println(0);
