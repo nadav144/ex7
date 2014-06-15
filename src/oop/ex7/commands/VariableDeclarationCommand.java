@@ -48,7 +48,7 @@ public class VariableDeclarationCommand implements Command {
 	/**
 	 * @return the var
 	 */
-	private Variable getVar() {
+	public Variable getVar() {
 		return var;
 	}
 	
