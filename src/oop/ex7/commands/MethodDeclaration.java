@@ -19,9 +19,10 @@ public class MethodDeclaration implements Command {
 	public MethodDeclaration( MatchResult declaration ) {
 		this.declaration = new String[3];
 		
-		this.declaration[0] = declaration.group( 1 );
-		this.declaration[1] = declaration.group( 2 );
-		this.declaration[2] = declaration.group( 3 );
+		this.declaration[0] = (declaration.group(2) == null) ? declaration.group( 1 ) : declaration.group(1)
+                + declaration.group(2);
+		this.declaration[1] = declaration.group( 3 );
+		this.declaration[2] = declaration.group( 4 );
 		
 		returnType = TermType.parse( this.declaration[0] );
 		
@@ -36,10 +37,9 @@ public class MethodDeclaration implements Command {
 			List< MatchResult > matchResults =
 					RegexUtils.Match( RegexUtils.PARAM_PATTERN, params );
 			for ( MatchResult result : matchResults ) {
-				Variable param= new Variable( result.group( 1 ),
-						result.group( 2 ) ) ;
-				param.setInited( true );
-				this.params.add(param);
+				
+				this.params.add( new Variable( (result.group(2) == null) ? result.group( 1 ) : result.group(1) + result.group(2),
+						result.group( 3 ) ) );
 			}
 		}
 		else {
@@ -77,6 +77,7 @@ public class MethodDeclaration implements Command {
 	@Override
 	public void updateScope( Scope scope ) {
 		for ( Variable var : getParams() ) {
+			var.setInited(true);
 			scope.getVars().put( var.getName(), var );
 		}
 	}

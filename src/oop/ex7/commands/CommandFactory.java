@@ -50,7 +50,7 @@ public class CommandFactory {
         else if (expresion.matches(RegexUtils.METHOD_DECLARATION_PATTERN)){
             MatchResult res = RegexUtils.MatchSignle(RegexUtils.METHOD_DECLARATION_PATTERN, expresion);
             // Get the name and return the command from the main scope
-            String methodName = res.group(2);
+            String methodName = res.group(3);
             return scope.getMainScope().getMethod(methodName);
 
         } else if (expresion.matches(METHOD_RETURN_STATEMENT)){

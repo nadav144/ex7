@@ -24,7 +24,7 @@ public class ExpressionFactory {
 	}
 	
 	public Expression create( String expression ) throws Exception {
-		
+		expression = expression.trim();
 		MatchResult result;
 		if (Pattern.matches( RegexUtils.ARRAY_ASSIGNMENT_LITERAL, expression ) ) {
 			result =
