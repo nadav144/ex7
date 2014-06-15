@@ -56,6 +56,8 @@ public class RegexUtils {
 	public static final String METHOD_NAME_PATTERN = "\\s*([a-zA-Z]\\w*)\\s*";
 	public static final String VARIABLE_NAME_PATTERN =
 			"\\s*(_?[a-zA-Z]\\w*)\\s*";
+	public static final String ARRAY_VARIABLE_NAME_PATTERN =
+			"\\s*(_?[a-zA-Z]\\w*)\\s*\\[(.+)\\]\\s*";
 	public static final String NEGATED_VARIABLE_NAME_PATTERN =
 			"\\s*\\-\\s*(_?[a-zA-Z]\\w*)\\s*";
 	/**
