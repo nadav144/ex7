@@ -28,14 +28,14 @@ public class ArrayItemAssignmentExpression extends AssignmentExpression {
 	 */
 	@Override
 	public ValidationResult isValid( Scope scope ) {
-		ValidationResult result = new ValidationResult();// = super.isValid(
-															// scope );
-		
+		ValidationResult result = new ValidationResult();
+
+        // Validate expressions and var
 		result.append( getVar().isValid( scope ) );
 		result.append( getExpression().isValid( scope ) );
-		
+
+        // Validate Assignment types
 		if ( result.getSuccessful() ) {
-			
 			if ( !TermType.VarType.canAssignTo( getVar().getType().getType(),
 					getExpression().getType( scope ).getType() ) ) {
 				result.fail( String.format(
@@ -45,11 +45,8 @@ public class ArrayItemAssignmentExpression extends AssignmentExpression {
 				
 			}
 		}
-//		
-//		if ( !var.isInited() ) {
-//			result.fail( "Array must be initialized before items can be assigned." );
-//		}
-		
+
+        // Validate position
 		if ( result.getSuccessful() ) {
 			result.append( positionExpression.isValid( scope ) );
 			if ( result.getSuccessful() && !var.isArray() ) {

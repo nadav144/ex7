@@ -2,6 +2,8 @@
 package oop.ex7.commands;
 
 import java.util.LinkedList;
+
+import oop.ex7.Exceptions.ExpressionSyntaxException;
 import oop.ex7.common.Expression;
 import oop.ex7.common.RegexUtils;
 import oop.ex7.common.Scope;
@@ -13,7 +15,7 @@ public class MethodInvocationExpression implements Expression {
 	private LinkedList< Expression > params;
 	private String name;
 	
-	public MethodInvocationExpression( String name, String params ) throws Exception {
+	public MethodInvocationExpression( String name, String params ) throws ExpressionSyntaxException {
 		this.name = name;
 		
 		this.params = new LinkedList< Expression >();

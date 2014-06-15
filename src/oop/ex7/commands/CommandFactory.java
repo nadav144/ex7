@@ -2,43 +2,47 @@
 package oop.ex7.commands;
 
 import oop.ex7.common.*;
+
+import java.io.SyncFailedException;
 import java.util.regex.MatchResult;
 
 /**
- * Created by Nadav on 11/06/14.
+ * Command factory creates command object from string expression using regex pattern to match the string content.
+ * this factory is the main factory of the complier, and uses the expression factory for expressions.
+ * the factory will return a new Command object
  */
 public class CommandFactory {
-	
-	public static final String IF_WHILE_STATEMENT =
-			"^\\s*(?:if|while)\\s*\\((.*)\\)\\s*\\{";
-	public static final String VAR_DECLARATION_STATEMENT =
-			"(int|double|String|boolean|char)\\s*(\\[\\s*\\])?\\s*(\\w*)\\s*(?:=(.*))?\\s*;";
-	public static final String VAR_ASSIGNMENT_STATEMENT =
-			"\\s*(\\w*)\\s*(\\[(.*)\\])?\\s*=(.*);";
-	public static final String METHOD_RETURN_STATEMENT = "return\\s*(.*);";
-	
-	public static Command CreateCommand( String expression, Scope scope )
+
+    /**
+     * Generate the right Command object for the given string content
+     * @param commandstr command string representation
+     * @param scope scope the command should be crated in. this uses by some of the command for initialization
+     * @return a new object that implements Command
+     * @throws Exception if the command is not a valid command in SJava
+     */
+	public static Command CreateCommand( String commandstr, Scope scope )
 			throws Exception {
-		if ( expression.matches( VAR_DECLARATION_STATEMENT ) ) {
+		// Var declaration statement command
+        if ( commandstr.matches(RegexUtils.VAR_DECLARATION_STATEMENT) ) {
 			if ( scope instanceof MainScope ) {
 				return new ValidCommand();
 			}
 			
 			MatchResult res =
-					RegexUtils.MatchSignle( VAR_DECLARATION_STATEMENT,
-							expression );
+					RegexUtils.MatchSignle( RegexUtils.VAR_DECLARATION_STATEMENT,
+							commandstr );
 			String typestring =
 					( res.group( 2 ) != null ) ? res.group( 1 ) + res.group( 2 )
 							: res.group( 1 );
 			return new VariableDeclarationCommand( typestring, res.group( 3 ),
 					res.group( 4 ) );
 		}
-		else if ( expression.matches( VAR_ASSIGNMENT_STATEMENT ) ) {
+
+        // Var assignment statement command
+		else if ( commandstr.matches( RegexUtils.VAR_ASSIGNMENT_STATEMENT ) ) {
 			MatchResult res =
-					RegexUtils.MatchSignle( VAR_ASSIGNMENT_STATEMENT,
-							expression );
-			
-			// TODO: OOOPS... what to do now?
+					RegexUtils.MatchSignle( RegexUtils.VAR_ASSIGNMENT_STATEMENT,
+							commandstr );
 			String paramName = res.group( 1 );
 			Expression arrayAssignmentExpression =
 					res.group( 3 ) != null
@@ -56,36 +60,40 @@ public class CommandFactory {
 			}
 			
 		}
-		if ( expression.matches( IF_WHILE_STATEMENT ) ) {
+        // IF WHILE Statement commands
+		else if ( commandstr.matches( RegexUtils.IF_WHILE_STATEMENT ) ) {
 			MatchResult res =
-					RegexUtils.MatchSignle( IF_WHILE_STATEMENT, expression );
+					RegexUtils.MatchSignle( RegexUtils.IF_WHILE_STATEMENT, commandstr );
 			return new IfWhileCommand( ExpressionFactory.instance().create(
 					res.group( 1 ) ) );
 			
 		}
-		else if ( expression.matches( RegexUtils.METHOD_DECLARATION_PATTERN ) ) {
+        // Method declaration commands
+		else if ( commandstr.matches( RegexUtils.METHOD_DECLARATION_PATTERN ) ) {
 			MatchResult res =
 					RegexUtils.MatchSignle(
-							RegexUtils.METHOD_DECLARATION_PATTERN, expression );
+							RegexUtils.METHOD_DECLARATION_PATTERN, commandstr );
 			// Get the name and return the command from the main scope
 			String methodName = res.group( 3 );
 			return scope.getMainScope().getMethod( methodName );
 			
 		}
-		else if ( expression.matches( RegexUtils.METHOD_INVOCATION_PATTERN ) ) {
-			return ExpressionFactory.instance().create( expression );
+        // Method invoke command
+		else if ( commandstr.matches( RegexUtils.METHOD_INVOCATION_PATTERN ) ) {
+			return ExpressionFactory.instance().create( commandstr );
 		}
-		else if ( expression.matches( METHOD_RETURN_STATEMENT ) ) {
+        // Return (value) command
+		else if ( commandstr.matches(RegexUtils.METHOD_RETURN_STATEMENT) ) {
 			MatchResult res =
-					RegexUtils.MatchSignle( METHOD_RETURN_STATEMENT, expression );
+					RegexUtils.MatchSignle( RegexUtils.METHOD_RETURN_STATEMENT, commandstr );
 			return new ReturnCommand( res.group( 1 ) );
 		}
-		
-		else if ( expression.equals( "}" ) ) {
+		// End of scope command
+		else if ( commandstr.equals( "}" ) ) {
 			return new EndOFScopeCommand();
 		}
 		
 		// if nothing matches - throw exception
-		throw new Exception( expression + " cannot be recognized." );
+		throw new SyncFailedException( commandstr + " cannot be recognized." );
 	}
 }

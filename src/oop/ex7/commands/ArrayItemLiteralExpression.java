@@ -8,10 +8,18 @@ import oop.ex7.common.ValidationResult;
 import oop.ex7.common.Variable;
 
 
+/**
+ * Represents assignment to array variable
+ */
 public class ArrayItemLiteralExpression extends VariableLiteralExpression {
 	
 	private Expression position;
-	
+
+    /**
+     * Initialize a new instance of ArrayItemLiteralExpression
+     * @param name name of the variable parameter
+     * @param position position to assign
+     */
 	public ArrayItemLiteralExpression( String name, Expression position ) {
 		super( name );
 		this.position = position;

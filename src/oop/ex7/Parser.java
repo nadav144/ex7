@@ -132,7 +132,7 @@ public class Parser {
 				content.replaceAll( RegexUtils.ENTIRE_METHOD_PATTERN, "" );
 		
 		results =
-				RegexUtils.Match( CommandFactory.VAR_DECLARATION_STATEMENT,
+				RegexUtils.Match( RegexUtils.VAR_DECLARATION_STATEMENT,
 						filtered );
 		
 		for ( MatchResult res : results ) {

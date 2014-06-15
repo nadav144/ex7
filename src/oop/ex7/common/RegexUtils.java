@@ -104,4 +104,12 @@ public class RegexUtils {
 	public static final String LINE_ENDING_PATTERN = ".*[{|}|;]$";
 	public static final String ENTIRE_METHOD_PATTERN =
 			"\\s*\\w+\\s+\\w+\\s*\\(.*\\)\\s*\\{(.|\\n|\\r)*(return)(.|\\n|\\r)*\\}";
+
+    public static final String IF_WHILE_STATEMENT =
+            "^\\s*(?:if|while)\\s*\\((.*)\\)\\s*\\{";
+    public static final String VAR_DECLARATION_STATEMENT =
+            "(int|double|String|boolean|char)\\s*(\\[\\s*\\])?\\s*(\\w*)\\s*(?:=(.*))?\\s*;";
+    public static final String VAR_ASSIGNMENT_STATEMENT =
+            "\\s*(\\w*)\\s*(\\[(.*)\\])?\\s*=(.*);";
+    public static final String METHOD_RETURN_STATEMENT = "return\\s*(.*);";
 }

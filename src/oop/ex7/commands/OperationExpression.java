@@ -1,6 +1,7 @@
 
 package oop.ex7.commands;
 
+import oop.ex7.Exceptions.ExpressionSyntaxException;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
 import oop.ex7.common.TermType;
@@ -39,7 +40,7 @@ public class OperationExpression implements Expression {
 	private Expression rhs;
 	
 	public OperationExpression( String lhs, String type, String rhs )
-			throws Exception {
+			throws ExpressionSyntaxException {
 		this.lhsString = lhs.trim();
 		this.rhsString = rhs.trim();
 		this.opString = type.trim();
@@ -71,8 +72,8 @@ public class OperationExpression implements Expression {
 		if ( result.getSuccessful() ) {
 			TermType lType = getLhs().getType( scope );
 			TermType rType = getRhs().getType( scope );
-			if ( !TermType.isArithmetic( lType )
-					|| !TermType.isArithmetic( rType ) || lType.isArray()
+			if ( !TermType.isArithmetic(lType)
+					|| !TermType.isArithmetic(rType) || lType.isArray()
 					|| rType.isArray() ) {
 				result.setSuccessful( false );
 				result.append( String.format(
