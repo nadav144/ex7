@@ -2,7 +2,6 @@
 package oop.ex7.common;
 
 import oop.ex7.commands.MethodDeclaration;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,38 +12,38 @@ import java.util.List;
 public class Scope {
 	
 	private List< Scope > subScopes;
-	private HashMap<String, Variable > vars;
-    private TermType  returnType;
-    private boolean returnedValue;
+	private HashMap< String, Variable > vars;
+	private TermType returnType;
+	private boolean returnedValue;
 	
 	private Scope parentScope;
 	
 	public Scope() {
 		subScopes = new ArrayList< Scope >();
-		vars = new HashMap<String, Variable >();
-        returnType = null;
-        returnedValue = false;
+		vars = new HashMap< String, Variable >();
+		returnType = null;
+		returnedValue = false;
 	}
-
-    public Scope(Scope scope){
-        this();
-        parentScope = scope;
-    }
-
-    public Scope(Scope scope, Command command){
-        this(scope);
-        if (command.getClass() == MethodDeclaration.class){
-            returnType = ((MethodDeclaration)command).getReturnType();
-        }
-    }
+	
+	public Scope( Scope scope ) {
+		this();
+		parentScope = scope;
+	}
+	
+	public Scope( Scope scope, Command command ) {
+		this( scope );
+		if ( command.getClass() == MethodDeclaration.class ) {
+			returnType = ( (MethodDeclaration) command ).getReturnType();
+		}
+	}
 	
 	public MainScope getMainScope() {
-
-        if (getClass() == MainScope.class)
-            return (MainScope)this;
-
+		
+		if ( getClass() == MainScope.class )
+			return (MainScope) this;
+		
 		Scope parent = parentScope;
-		while (parent != null && parent.getClass() != MainScope.class) {
+		while ( parent != null && parent.getClass() != MainScope.class ) {
 			parent = parent.parentScope;
 		}
 		
@@ -57,28 +56,28 @@ public class Scope {
 	/**
 	 * @return the vars
 	 */
-	public HashMap<String, Variable > getVars() {
+	public HashMap< String, Variable > getVars() {
 		return vars;
 	}
-
-    public Variable getVar(String name){
-        if (getVars().containsKey(name))
-            return getVars().get(name);
-        else if (parentScope != null)
-            return parentScope.getVar(name);
-        else
-            return null;
-    }
-
-    public TermType getReturnType() {
-        return returnType;
-    }
-
-    public boolean isReturnedValue() {
-        return returnedValue;
-    }
-
-    public void setReturnedValue(boolean returned){
-        returnedValue = returned;
-    }
+	
+	public Variable getVar( String name ) {
+		if ( getVars().containsKey( name ) )
+			return getVars().get( name );
+		else if ( parentScope != null )
+			return parentScope.getVar( name );
+		else
+			return null;
+	}
+	
+	public TermType getReturnType() {
+		return returnType ;
+	}
+	
+	public boolean isReturnedValue() {
+		return returnedValue;
+	}
+	
+	public void setReturnedValue( boolean returned ) {
+		returnedValue = returned;
+	}
 }

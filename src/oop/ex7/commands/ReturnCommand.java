@@ -37,6 +37,12 @@ public class ReturnCommand implements Command {
 			}
 			
 		}
+		else {
+			if ( !scope.getReturnType().equals(
+					new TermType( TermType.VarType.VOID ) ) ) {
+				res.fail( "The return for the method is not of the right type" );
+			}
+		}
 		
 		return res;
 	}
