@@ -135,7 +135,7 @@ public class TermType {
 	}
 	
 	public static boolean canAssignTo(TermType lhs, TermType rhs){
-		if (lhs.isArray()^rhs.isArray()){
+		if (lhs.isArray() != rhs.isArray()){
 			return false;
 		}
 		
