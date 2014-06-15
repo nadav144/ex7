@@ -9,7 +9,7 @@ public class TermType {
 	public enum VarType {
 		INT, DOUBLE, STRING, CHAR, BOOLEAN, VOID,ANY;
 		
-		public static VarType parse( String source ) {
+		public static VarType parse( String source ) throws Exception{
 			for ( VarType type : VarType.values() ) {
 				if ( type.toString().equalsIgnoreCase( source ) ) {
 					return type;
@@ -17,7 +17,7 @@ public class TermType {
 				
 			}
 			
-			return null;
+			throw new Exception("Type is not valid:" + source);
 		}
 		
 		public static boolean canAssignTo( VarType lhs, VarType rhs ) {
@@ -79,7 +79,7 @@ public class TermType {
 		return false;
 	}
 	
-	public static TermType parse( String source ) {
+	public static TermType parse( String source ) throws Exception{
 		TermType result = null;
 		if ( source != null ) {
 			source = source.trim();

@@ -33,7 +33,12 @@ public class Sjavac {
 
         // print if needed
         } catch (Exception ex){
-            System.out.println(1);
+            if (ex.getClass() == IOException.class){
+                System.out.println(2);
+            } else {
+                System.out.println(1);
+            }
+
             System.out.println(ex.getMessage());
 
 

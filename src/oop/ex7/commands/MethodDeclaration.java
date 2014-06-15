@@ -16,7 +16,7 @@ public class MethodDeclaration implements Command {
 	private String[] declaration;
 	private int numOfParams;
 	
-	public MethodDeclaration( MatchResult declaration ) {
+	public MethodDeclaration( MatchResult declaration ) throws Exception{
 		this.declaration = new String[3];
 		
 		this.declaration[0] = (declaration.group(2) == null) ? declaration.group( 1 ) : declaration.group(1)
@@ -25,6 +25,7 @@ public class MethodDeclaration implements Command {
 		this.declaration[2] = declaration.group( 4 );
 		
 		returnType = TermType.parse( this.declaration[0] );
+
 		
 		this.params = new LinkedList< Variable >();
 		
@@ -78,7 +79,7 @@ public class MethodDeclaration implements Command {
 	public void updateScope( Scope scope ) {
 		for ( Variable var : getParams() ) {
 			var.setInited(true);
-			scope.getVars().put( var.getName(), var );
+			scope.getVars().put(var.getName(), var);
 		}
 	}
 	

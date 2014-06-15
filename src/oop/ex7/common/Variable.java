@@ -18,7 +18,7 @@ public class Variable implements Command {
 	private String name;
 	private boolean inited;
 	
-	public Variable( String type, String name ) {
+	public Variable( String type, String name ) throws Exception{
 		
 		typeString = type;
 		
