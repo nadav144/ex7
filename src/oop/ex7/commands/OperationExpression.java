@@ -40,9 +40,9 @@ public class OperationExpression implements Expression {
 	
 	public OperationExpression( String lhs, String type, String rhs )
 			throws Exception {
-		this.lhsString = lhs;
-		this.rhsString = rhs;
-		this.opString = type;
+		this.lhsString = lhs.trim();
+		this.rhsString = rhs.trim();
+		this.opString = type.trim();
 		
 		this.lhs = ExpressionFactory.instance().create( lhs );
 		this.rhs = ExpressionFactory.instance().create( rhs );
