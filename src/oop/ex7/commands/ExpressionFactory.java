@@ -68,7 +68,7 @@ public class ExpressionFactory {
 					RegexUtils.MatchSignle( RegexUtils.DOUBLE_LITERAL_PATTERN,
 							expression );
 			try {
-				int number = Integer.parseInt( result.group().trim() );
+                int number = Integer.parseInt( result.group(1).trim() );
 				return new LiteralExpression( new TermType(
 						TermType.VarType.INT ), number >= 0 );
 			}
