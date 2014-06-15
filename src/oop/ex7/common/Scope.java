@@ -70,7 +70,9 @@ public class Scope {
 	}
 	
 	public TermType getReturnType() {
-		return returnType ;
+		return returnType != null ? returnType
+				: ( parentScope.getReturnType() != null
+						? parentScope.getReturnType() : null );
 	}
 	
 	public boolean isReturnedValue() {
@@ -79,5 +81,12 @@ public class Scope {
 	
 	public void setReturnedValue( boolean returned ) {
 		returnedValue = returned;
+	}
+	
+	/**
+	 * @return the parentScope
+	 */
+	public Scope getParentScope() {
+		return parentScope;
 	}
 }
