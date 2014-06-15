@@ -32,7 +32,7 @@ public class CommandFactory {
             MatchResult res = RegexUtils.MatchSignle(VAR_ASSIGNMENT_STATEMENT, expression);
             // TODO: OOOPS... what to do now?
             String paramName = res.group(1);
-            Expression arrayAssignmentExpression = ExpressionFactory.instance().create(res.group(3));
+            Expression arrayAssignmentExpression = res.group(3)!=null? ExpressionFactory.instance().create(res.group(3)):null;
             Expression RHSexpression = ExpressionFactory.instance().create(res.group(4));
             Variable var = scope.getVar(paramName);
             if (arrayAssignmentExpression == null){
