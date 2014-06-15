@@ -7,9 +7,9 @@ import java.util.Set;
 public class TermType {
 	
 	public enum VarType {
-		INT, DOUBLE, STRING, CHAR, BOOLEAN, VOID,ANY;
+		INT, DOUBLE, STRING, CHAR, BOOLEAN, VOID, ANY;
 		
-		public static VarType parse( String source ) throws Exception{
+		public static VarType parse( String source ) throws Exception {
 			for ( VarType type : VarType.values() ) {
 				if ( type.toString().equalsIgnoreCase( source ) ) {
 					return type;
@@ -17,11 +17,11 @@ public class TermType {
 				
 			}
 			
-			throw new Exception("Type is not valid:" + source);
+			throw new Exception( "Type is not valid:" + source );
 		}
 		
 		public static boolean canAssignTo( VarType lhs, VarType rhs ) {
-			if (ANY.equals( rhs )){
+			if ( ANY.equals( rhs ) ) {
 				return true;
 			}
 			switch ( lhs ) {
@@ -79,12 +79,13 @@ public class TermType {
 		return false;
 	}
 	
-	public static TermType parse( String source ) throws Exception{
+	public static TermType parse( String source ) throws Exception {
 		TermType result = null;
 		if ( source != null ) {
 			source = source.trim();
 			
 			boolean isArray = false;
+			source = source.replaceAll( "\\[\\s*\\]", "[]" );
 			if ( source.endsWith( "[]" ) ) {
 				source = source.substring( 0, source.length() - 2 );
 				isArray = true;
@@ -97,7 +98,7 @@ public class TermType {
 	}
 	
 	public static TermType getCommon( TermType[] terms ) {
-		Set< TermType > distinctTerms = new HashSet<TermType>();
+		Set< TermType > distinctTerms = new HashSet< TermType >();
 		for ( TermType term : terms ) {
 			distinctTerms.add( term );
 		}
@@ -134,8 +135,8 @@ public class TermType {
 		}
 	}
 	
-	public static boolean canAssignTo(TermType lhs, TermType rhs){
-		if (lhs.isArray() != rhs.isArray()){
+	public static boolean canAssignTo( TermType lhs, TermType rhs ) {
+		if ( lhs.isArray() != rhs.isArray() ) {
 			return false;
 		}
 		

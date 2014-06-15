@@ -7,6 +7,7 @@ import oop.ex7.common.Scope;
 import oop.ex7.common.TermType;
 import oop.ex7.common.Variable;
 
+
 public class ArrayItemLiteralExpression extends VariableLiteralExpression {
 	
 	private Expression position;
