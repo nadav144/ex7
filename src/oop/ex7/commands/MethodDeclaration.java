@@ -14,6 +14,7 @@ public class MethodDeclaration implements Command {
 	private LinkedList< Variable > params;
 	private TermType returnType;
 	private String[] declaration;
+	private int numOfParams;
 	
 	public MethodDeclaration( MatchResult declaration ) {
 		this.declaration = new String[3];
@@ -28,9 +29,10 @@ public class MethodDeclaration implements Command {
 		
 		// TODO: params.length should equal to matchResults.length
 		// not sure how to do this, other than save the number for later
-		if ( !this.declaration[2].equals( "" ) ) {
+		if ( !this.declaration[2].trim().equals( "" ) ) {
 			String paramsString = this.declaration[2].trim();
 			String[] params = paramsString.split( "," );
+			this.numOfParams = params.length;
 			List< MatchResult > matchResults =
 					RegexUtils.Match( RegexUtils.PARAM_PATTERN, params );
 			for ( MatchResult result : matchResults ) {
@@ -38,6 +40,9 @@ public class MethodDeclaration implements Command {
 				this.params.add( new Variable( result.group( 1 ),
 						result.group( 2 ) ) );
 			}
+		}
+		else {
+			this.numOfParams = 0;
 		}
 		
 	}
@@ -89,6 +94,11 @@ public class MethodDeclaration implements Command {
 		}
 		
 		// TODO: check length of params
+		if ( getParams().size() != getNumOfParams() ) {
+			result.fail( String.format(
+					"Declaration has invalid params. Method: '%s', Params: '%s'",
+					getName(), declaration[2] ) );
+		}
 		Set< String > names = new HashSet< String >();
 		for ( Variable param : getParams() ) {
 			result.append( param.isValid( scope ) );
@@ -100,5 +110,12 @@ public class MethodDeclaration implements Command {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * @return the numOfParams
+	 */
+	private int getNumOfParams() {
+		return numOfParams;
 	}
 }

@@ -1,6 +1,7 @@
 
 package oop.ex7.commands;
 
+import java.util.HashMap;
 import oop.ex7.ValidationResult;
 import oop.ex7.common.Command;
 import oop.ex7.common.Scope;
@@ -37,6 +38,9 @@ public class VariableDeclarationCommand implements Command {
 		result.append( getVar().isValid( scope ) );
 		if ( getAssign() != null ) {
 			result.append( getAssign().isValid( scope ) );
+		}
+		if ( scope.getVars().containsKey( getVar().getName() ) ) {
+			result.fail( "Cannot declare more than one variable of the same name in the same scope" );
 		}
 		return result;
 	}

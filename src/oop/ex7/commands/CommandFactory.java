@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 public class CommandFactory {
 
     public static final String IF_WHILE_STATEMENT = "^\\s*(?:if|while)\\s*\\((.*)\\)\\s*\\{";
-    public static final String VAR_DECLARATION_STATEMENT = "(int|double|String|boolean|char)(\\[\\])?\\s(\\w*);";
-    public static final String VAR_DECLARATION_INIT_SATEMENT = "(int|double|String|boolean|char)(\\[\\])?\\s(\\w*)\\s*=\\s*(.*);";
-    public static final String VAR_ASSIGNMENT_STATEMENT = "\\s*(\\w*)(\\[(.*)\\])?\\s*=\\s*(.*);";
+    public static final String VAR_DECLARATION_STATEMENT = "(int|double|String|boolean|char)\\s*(\\[\\s*\\])?\\s*(\\w*)\\s*;";
+    public static final String VAR_DECLARATION_INIT_SATEMENT = "(int|double|String|boolean|char)\\s*(\\[\\s*\\])?\\s*(\\w*)\\s*=(.*);";
+    public static final String VAR_ASSIGNMENT_STATEMENT = "\\s*(\\w*)\\s*(\\[(.*)\\])?\\s*=(.*);";
     public static final String METHOD_RETURN_STATEMENT = "return\\s*(.*);";
 
 
