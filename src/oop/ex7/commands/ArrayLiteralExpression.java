@@ -80,27 +80,6 @@ public class ArrayLiteralExpression implements Expression {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * oop.ex7.commands.AssignmentExpression#updateScope(oop.ex7.common.Scope)
-	 */
-	@Override
-	public void updateScope( Scope scope ) {
-		// TODO Auto-generated method stub
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see oop.ex7.common.Command#isScope()
-	 */
-	@Override
-	public boolean isScope() {
-		return false;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see oop.ex7.common.Expression#getType(oop.ex7.common.Scope)
 	 */
 	@Override

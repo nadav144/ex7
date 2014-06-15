@@ -61,7 +61,6 @@ public class Variable implements Command {
 	 * @return the isArray
 	 */
 	public boolean isArray() {
-		//TODO maybe delete
 		return getType().isArray();
 	}
 	

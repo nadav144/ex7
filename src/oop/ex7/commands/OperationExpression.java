@@ -105,23 +105,8 @@ public class OperationExpression implements Expression {
 		
 		return result;
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see oop.ex7.common.Command#isScope()
-	 */
-	@Override
-	public boolean isScope() {
-		return false;
-	}
-	
-	@Override
-	public void updateScope( Scope scope ) {
-		// nothing to do here
-	}
-	
-	/*
+
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see oop.ex7.common.Expression#getType(oop.ex7.common.Scope)

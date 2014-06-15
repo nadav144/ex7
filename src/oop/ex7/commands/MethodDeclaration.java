@@ -28,8 +28,6 @@ public class MethodDeclaration implements Command {
 		
 		this.params = new LinkedList< Variable >();
 		
-		// TODO: params.length should equal to matchResults.length
-		// not sure how to do this, other than save the number for later
 		if ( !this.declaration[2].trim().equals( "" ) ) {
 			String paramsString = this.declaration[2].trim();
 			String[] params = paramsString.split( "," );
@@ -95,7 +93,6 @@ public class MethodDeclaration implements Command {
 			result.fail( String.format( "Illegal method name: '%s'", getName() ) );
 		}
 		
-		// TODO: check length of params
 		if ( getParams().size() != getNumOfParams() ) {
 			result.fail( String.format(
 					"Declaration has invalid params. Method: '%s', Params: '%s'",

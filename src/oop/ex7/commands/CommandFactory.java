@@ -80,7 +80,7 @@ public class CommandFactory {
 		}
         // Method invoke command
 		else if ( commandstr.matches( RegexUtils.METHOD_INVOCATION_PATTERN ) ) {
-			return ExpressionFactory.instance().create( commandstr );
+			return (Command) ExpressionFactory.instance().create( commandstr );
 		}
         // Return (value) command
 		else if ( commandstr.matches(RegexUtils.METHOD_RETURN_STATEMENT) ) {

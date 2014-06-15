@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 /**
  * Represent the main compiler. this class will compile the file given using the factories and the command validation
- * method. 
+ * method.
  */
 public class Compiler {
 	
