@@ -62,7 +62,7 @@ public class RegexUtils {
 	 * group 1 - name group 2 - params
 	 */
 	public static final String METHOD_INVOCATION_PATTERN =
-			"^\\s*([a-zA-Z]\\w*)\\s*\\((.*)\\)\\s*$";
+			"^\\s*([a-zA-Z]\\w*)\\s*\\((.*)\\)\\s*;?";
 	/**
 	 * group 1 - lhs, group 2 - operator, group 3 - rhs
 	 */
