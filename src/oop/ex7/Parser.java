@@ -60,7 +60,6 @@ public class Parser {
             String line = lines.get(i);
             if (!line.startsWith(COMMENT_INDICATOR)){
                 line = line.trim();
-                line = line.replace("\t", "");
                 if (line.length() > 0){
                     Matcher m = p.matcher(line);
                     if (m.matches())
