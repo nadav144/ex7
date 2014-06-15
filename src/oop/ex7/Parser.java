@@ -58,8 +58,9 @@ public class Parser {
 
         for (int i=0;i<lines.size(); i++){
             String line = lines.get(i);
+            line = line.trim();
             if (!line.startsWith(COMMENT_INDICATOR)){
-                line = line.trim();
+
                 if (line.length() > 0){
                     Matcher m = p.matcher(line);
                     if (m.matches())
