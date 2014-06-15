@@ -64,11 +64,14 @@ public class ExpressionFactory {
 			return new LiteralExpression( new TermType( TermType.VarType.CHAR ) );
 		}
 		if ( Pattern.matches( RegexUtils.DOUBLE_LITERAL_PATTERN, expression ) ) {
+            expression = expression.replace(" ", "" );
 			result =
 					RegexUtils.MatchSignle( RegexUtils.DOUBLE_LITERAL_PATTERN,
 							expression );
 			try {
-                int number = Integer.parseInt( result.group(1).trim() );
+                int number = Integer.parseInt( result.group(0).trim() );
+				Integer.parseInt( result.group().trim() );
+
 				return new LiteralExpression( new TermType(
 						TermType.VarType.INT ), number >= 0 );
 			}
