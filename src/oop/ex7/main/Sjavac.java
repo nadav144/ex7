@@ -1,7 +1,6 @@
 
 package oop.ex7.main;
 
-import oop.ex7.Parser;
 import oop.ex7.common.ValidationResult;
 import java.io.*;
 import java.nio.charset.Charset;
@@ -33,9 +32,9 @@ public class Sjavac {
 			List< String > lines =
 					Files.readAllLines( file.toPath(), Charset.defaultCharset() );
 
-			String Content = Parser.truncAndFixLines( lines );
+			String Content = Compiler.truncAndFixLines(lines);
 			
-			ValidationResult res = Parser.parse( Content );
+			ValidationResult res = Compiler.parse(Content);
 
             if (res.getSuccessful()){
                 System.out.println(0);

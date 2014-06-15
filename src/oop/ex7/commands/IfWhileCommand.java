@@ -9,13 +9,18 @@ import oop.ex7.common.ValidationResult;
 import oop.ex7.common.TermType.VarType;
 
 /**
- * Created by Nadav on 11/06/14.
+* Represent an if/while Command scope
+ * this command contains a single boolean expression as condition for enterting the scope.
  */
 public class IfWhileCommand implements Command {
 	
 	private Expression booleanExpresion;
-	
-	public IfWhileCommand( Expression expression ) {
+
+    /**
+     * Intialize a new instance of IfWhileCommand
+     * @param expression boolean expression of the command
+     */
+    public IfWhileCommand( Expression expression ) {
 		booleanExpresion = expression;
 	}
 	
@@ -32,6 +37,7 @@ public class IfWhileCommand implements Command {
 	@Override
 	public ValidationResult isValid( Scope scope ) {
 		ValidationResult res = new ValidationResult();
+        // Validate the expression is valid, and of type boolean
 		res.append( booleanExpresion.isValid( scope ) );
 		TermType booleanType = new TermType( VarType.BOOLEAN );
 		if ( res.getSuccessful()

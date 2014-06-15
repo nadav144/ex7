@@ -1,35 +1,41 @@
-
 package oop.ex7.commands;
 
 import oop.ex7.common.*;
 
 /**
- * Created by Nadav on 14/06/14.
+ * Represents an assignment to array item command
  */
 public class ArrayItemAssignmentExpression extends AssignmentExpression {
 	
 	private Expression positionExpression;
 	
 	/**
-	 * @param var
-	 * @param expression
+     * Initialize a new instance of ArrayItemAssignmentExpression
+	 * @param var array variable to assign to
+	 * @param expression expression to assign
 	 */
 	public ArrayItemAssignmentExpression( Variable var, Expression position,
 											Expression expression ) {
 		super( var, expression );
 		positionExpression = position;
 	}
-	
+
+    /*
+	 * (non-Javadoc)
+	 *
+	 * @see oop.ex7.common.CommandValidator#isValid(java.lang.String,
+	 * oop.ex7.common.Scope)
+	 */
 	@Override
 	public ValidationResult isValid( Scope scope ) {
-		ValidationResult result = new ValidationResult();// = super.isValid(
-															// scope );
-		
+		ValidationResult result = new ValidationResult();
+
+        // Validate expressions and var
 		result.append( getVar().isValid( scope ) );
 		result.append( getExpression().isValid( scope ) );
-		
+
+        // Validate Assignment types
 		if ( result.getSuccessful() ) {
-			
 			if ( !TermType.VarType.canAssignTo( getVar().getType().getType(),
 					getExpression().getType( scope ).getType() ) ) {
 				result.fail( String.format(
@@ -39,11 +45,8 @@ public class ArrayItemAssignmentExpression extends AssignmentExpression {
 				
 			}
 		}
-//		
-//		if ( !var.isInited() ) {
-//			result.fail( "Array must be initialized before items can be assigned." );
-//		}
-		
+
+        // Validate position
 		if ( result.getSuccessful() ) {
 			result.append( positionExpression.isValid( scope ) );
 			if ( result.getSuccessful() && !var.isArray() ) {

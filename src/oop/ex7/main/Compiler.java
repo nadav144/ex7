@@ -1,6 +1,7 @@
 
-package oop.ex7;
+package oop.ex7.main;
 
+import oop.ex7.Exceptions.CommandSyntaxException;
 import oop.ex7.commands.CommandFactory;
 import oop.ex7.commands.EndOFScopeCommand;
 import oop.ex7.commands.MethodDeclaration;
@@ -14,9 +15,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Nadav on 10/06/14.
+ * Represent the main compiler. this class will compile the file given using the factories and the command validation
+ * method. 
  */
-public class Parser {
+public class Compiler {
 	
 	/**
 	 * Preprocess text, removing unnecessary lines. (e.g. comments etc.)
@@ -88,7 +90,7 @@ public class Parser {
 	 *            the scope the houses the methods
 	 */
 	private static ValidationResult preProcessMethods( String content,
-			MainScope mainScope ) {
+			MainScope mainScope ) throws CommandSyntaxException{
 		ValidationResult result = new ValidationResult();
 		// Search for method declarations
 		List< MatchResult > results =
@@ -132,7 +134,7 @@ public class Parser {
 				content.replaceAll( RegexUtils.ENTIRE_METHOD_PATTERN, "" );
 		
 		results =
-				RegexUtils.Match( CommandFactory.VAR_DECLARATION_STATEMENT,
+				RegexUtils.Match( RegexUtils.VAR_DECLARATION_STATEMENT,
 						filtered );
 		
 		for ( MatchResult res : results ) {

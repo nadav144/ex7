@@ -7,10 +7,17 @@ import oop.ex7.common.TermType;
 import oop.ex7.common.ValidationResult;
 import oop.ex7.common.Variable;
 
+/**
+ * Represent a literal variable expression used to get the variable content
+ */
 public class VariableLiteralExpression implements Expression {
 	
 	private String name;
-	
+
+    /**
+     * Initialize a new instance of VariableLiteralExpression
+     * @param name name of the variable
+     */
 	public VariableLiteralExpression( String name ) {
 		this.name = name;
 	}
@@ -29,7 +36,7 @@ public class VariableLiteralExpression implements Expression {
 	public ValidationResult isValid(Scope scope ) {
 		ValidationResult result = new ValidationResult();
 		Variable var = scope.getVar(getName());
-		
+		// make sure the variable exists in the scope
 		if ( var == null) {
 			result.setSuccessful( false );
 			result.append( String.format(
@@ -43,7 +50,7 @@ public class VariableLiteralExpression implements Expression {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public TermType getType( Scope scope ) {
         Variable var = scope.getVar(getName());

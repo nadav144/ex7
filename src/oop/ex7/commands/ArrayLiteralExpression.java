@@ -5,19 +5,30 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import oop.ex7.Exceptions.CommandSyntaxException;
+import oop.ex7.Exceptions.ExpressionSyntaxException;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
 import oop.ex7.common.TermType;
 import oop.ex7.common.ValidationResult;
 
+/**
+ * Represent an array variable Assignment of one or more expressions as values
+ */
 public class ArrayLiteralExpression implements Expression {
 	
 	private List< Expression > expressions;
-	
-	public ArrayLiteralExpression( String params ) throws Exception {
+
+    /**
+     * Initialize a new instance of ArrayLiteralExpression
+     * @param params params to assign
+     * @throws Exception in case of bad parameters
+     */
+	public ArrayLiteralExpression( String params ) throws ExpressionSyntaxException{
         // this is invalid syntax, we must fail it.
         if (params.endsWith(","))
-            throw new Exception("invalid array assignment");
+            throw new ExpressionSyntaxException("invalid array assignment");
 
 		String[] items = params.split( "," );
 		expressions = new LinkedList< Expression >();
@@ -62,23 +73,7 @@ public class ArrayLiteralExpression implements Expression {
 				result.append( "Array initializaer has mismatching types" );
 			}
 		}
-		//
-		// boolean canAssign = true;
-		// for ( VarType i : t ) {
-		// canAssign = true;
-		// for ( VarType j : t ) {
-		// canAssign = canAssign && VarType.canAssignTo( i, j );
-		// }
-		// if ( canAssign ) {
-		// break;
-		// }
-		// }
-		// if ( !canAssign ) {
-		// result.setSuccessful( false );
-		// result.append( "Array initializaer has mismatching types" );
-		// }
-		// TODO: delete comment
-		
+
 		return result;
 	}
 	
@@ -127,7 +122,7 @@ public class ArrayLiteralExpression implements Expression {
 	}
 	
 	/**
-	 * @return the expressions
+	 * @return the expressions of that assignment
 	 */
 	private List< Expression > getExpressions() {
 		return expressions;

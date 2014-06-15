@@ -6,21 +6,25 @@ package oop.ex7.common;
 
 
 /**
- * @author Jirsch
- * 
+ * Represent a variable*
  */
 public class Variable implements Command {
 	
 	private TermType type;
 	private String typeString;
-//	private boolean isArray;
 	private String name;
 	private boolean inited;
-	
+
+
+    /**
+     * Initzlie a new instance of Variable
+     * @param type type of the variable
+     * @param name name of the variable
+     * @throws IllegalArgumentException if type cannot be parsed
+     */
 	public Variable( String type, String name ) throws IllegalArgumentException{
 		
 		typeString = type;
-		
 		this.type = TermType.parse( type );
 		this.name = name;
 		this.inited = false;
@@ -121,7 +125,7 @@ public class Variable implements Command {
 
     @Override
     public void updateScope(Scope scope) {
-
+        // nothing to do here
     }
 
 }

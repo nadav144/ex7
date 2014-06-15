@@ -8,13 +8,18 @@ import oop.ex7.common.TermType;
 import oop.ex7.common.ValidationResult;
 
 /**
- * Created by Nadav on 13/06/14.
- */
+* Represent an return command (used by methods)
+ * */
 public class ReturnCommand implements Command {
 	
 	private Expression expression;
 	private boolean isVoid;
-	
+
+    /**
+     * Initalize a new instance of ReturnCommand
+     * @param returnExpresion the expression to return
+     * @throws Exception if expression is invalid
+     */
 	public ReturnCommand( String returnExpresion ) throws Exception {
 		if ( !returnExpresion.equals( "" ) )
 			expression = ExpressionFactory.instance().create( returnExpresion );
@@ -54,7 +59,9 @@ public class ReturnCommand implements Command {
 	
 	@Override
 	public void updateScope( Scope scope ) {
-		scope.setReturnedValue( true );
+		// update the return value for that scope
+        scope.setReturnedValue( true );
+
 		
 	}
 }

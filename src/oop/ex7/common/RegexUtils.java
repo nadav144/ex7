@@ -8,10 +8,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Nadav on 10/06/14.
- */
+* Static class with simple regex operation used by the compiler.
+ *  */
 public class RegexUtils {
-	
+
+    /**
+     * Match many results by regex pattern
+     * @param pattern pattern to match by
+     * @param content content to match to
+     * @return list of MatchResults for that pattern and content
+     */
 	public static List< MatchResult > Match( String pattern, String content ) {
 		List< MatchResult > returnValue = new ArrayList< MatchResult >();
 		Pattern regex = Pattern.compile( pattern, Pattern.MULTILINE );
@@ -24,7 +30,13 @@ public class RegexUtils {
 		return returnValue;
 		
 	}
-	
+
+    /**
+     * Match many results by regex pattern
+     * @param pattern pattern to match by
+     * @param content content to match to
+     * @return list of MatchResults for that pattern and content
+     */
 	public static List< MatchResult > Match( String pattern, String[] content ) {
 		List< MatchResult > returnValue = new ArrayList< MatchResult >();
 		Pattern regex = Pattern.compile( pattern, Pattern.MULTILINE );
@@ -38,7 +50,13 @@ public class RegexUtils {
 		
 		return returnValue;
 	}
-	
+
+    /**
+     * Match a single results by regex pattern
+     * @param pattern pattern to match by
+     * @param content content to match to
+     * @return a single, first MatchResult for that pattern and content
+     */
 	public static MatchResult MatchSignle( String pattern, String content ) {
 		Pattern regex = Pattern.compile( pattern, Pattern.MULTILINE );
 		Matcher matcher = regex.matcher( content );
@@ -48,18 +66,27 @@ public class RegexUtils {
 		return null;
 		
 	}
-	
+
+    //**********************
+    // Regex Patterns
+    //**********************
+
+
 	/**
 	 * group 1 - type, group 2 - name
 	 */
 	public static final String PARAM_PATTERN =
 			"^\\s*(\\w*)\\s*(\\[\\])?\\s*(\\w*)\\s*$";
-	public static final String METHOD_NAME_PATTERN = "\\s*([a-zA-Z]\\w*)\\s*";
-	public static final String VARIABLE_NAME_PATTERN =
+
+    public static final String METHOD_NAME_PATTERN = "\\s*([a-zA-Z]\\w*)\\s*";
+
+    public static final String VARIABLE_NAME_PATTERN =
 			"\\s*(_?[a-zA-Z]\\w*)\\s*";
-	public static final String ARRAY_VARIABLE_NAME_PATTERN =
+
+    public static final String ARRAY_VARIABLE_NAME_PATTERN =
 			"\\s*(_?[a-zA-Z]\\w*)\\s*\\[(.+)\\]\\s*";
-	public static final String NEGATED_VARIABLE_NAME_PATTERN =
+
+    public static final String NEGATED_VARIABLE_NAME_PATTERN =
 			"\\s*\\-\\s*(_?[a-zA-Z]\\w*)\\s*";
 	/**
 	 * group 1 - name group 2 - params
@@ -100,8 +127,22 @@ public class RegexUtils {
 	
 	public static final String ARRAY_ASSIGNMENT_LITERAL =
 			"^\\s*\\{\\s*(.*)\\s*\\}\\s*$";
-	public static final String COMMENT_INDICATOR = "//";
-	public static final String LINE_ENDING_PATTERN = ".*[{|}|;]$";
-	public static final String ENTIRE_METHOD_PATTERN =
+
+    public static final String COMMENT_INDICATOR = "//";
+
+    public static final String LINE_ENDING_PATTERN = ".*[{|}|;]$";
+
+    public static final String ENTIRE_METHOD_PATTERN =
 			"\\s*\\w+\\s+\\w+\\s*\\(.*\\)\\s*\\{(.|\\n|\\r)*(return)(.|\\n|\\r)*\\}";
+
+    public static final String IF_WHILE_STATEMENT =
+            "^\\s*(?:if|while)\\s*\\((.*)\\)\\s*\\{";
+
+    public static final String VAR_DECLARATION_STATEMENT =
+            "(int|double|String|boolean|char)\\s*(\\[\\s*\\])?\\s*(\\w*)\\s*(?:=(.*))?\\s*;";
+
+    public static final String VAR_ASSIGNMENT_STATEMENT =
+            "\\s*(\\w*)\\s*(\\[(.*)\\])?\\s*=(.*);";
+
+    public static final String METHOD_RETURN_STATEMENT = "return\\s*(.*);";
 }
