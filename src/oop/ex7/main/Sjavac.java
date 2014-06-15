@@ -37,7 +37,7 @@ public class Sjavac {
 			
 			ValidationResult res = Parser.parse( Content );
 
-            if (res.getsuccessful()){
+            if (res.getSuccessful()){
                 System.out.println(0);
 			}
 			else {

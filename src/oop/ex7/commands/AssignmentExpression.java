@@ -36,7 +36,7 @@ public class AssignmentExpression implements Command {
 		result.append( getVar().isValid( scope ) );
 		result.append( getExpression().isValid( scope ) );
 		
-		if ( result.getsuccessful() ) {
+		if ( result.getSuccessful() ) {
 			
 			if ( !TermType.canAssignTo( getVar().getType(),
 					getExpression().getType( scope ) ) ) {

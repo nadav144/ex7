@@ -50,7 +50,7 @@ public class ArrayLiteralExpression implements Expression {
 		for ( Expression term : getExpressions() ) {
 			
 			result.append( term.isValid( scope ) );
-			if ( result.getsuccessful() ) {
+			if ( result.getSuccessful() ) {
 				types.add( term.getType( scope ) );
 			}
 		}

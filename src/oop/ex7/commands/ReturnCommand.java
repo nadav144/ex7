@@ -27,7 +27,7 @@ public class ReturnCommand implements Command {
 		ValidationResult res = new ValidationResult();
 		if ( !isVoid ) {
 			res.append( expression.isValid( scope ) );
-			if ( res.getsuccessful() ) {
+			if ( res.getSuccessful() ) {
 				
 				if ( !TermType.canAssignTo( scope.getReturnType(),
 						expression.getType( scope ) ) ) {

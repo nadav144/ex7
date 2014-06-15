@@ -21,7 +21,7 @@ public class NegatedVariableLiteralExpression extends VariableLiteralExpression 
 	public ValidationResult isValid( Scope scope ) {
 		ValidationResult result = super.isValid( scope );
 		
-		if ( result.getsuccessful() ) {
+		if ( result.getSuccessful() ) {
 			TermType type = super.getType( scope );
 			if ( !TermType.isArithmetic( type ) ) {
 				result.setSuccessful( false );

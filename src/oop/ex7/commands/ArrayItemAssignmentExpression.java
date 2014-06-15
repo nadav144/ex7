@@ -28,7 +28,7 @@ public class ArrayItemAssignmentExpression extends AssignmentExpression {
 		result.append( getVar().isValid( scope ) );
 		result.append( getExpression().isValid( scope ) );
 		
-		if ( result.getsuccessful() ) {
+		if ( result.getSuccessful() ) {
 			
 			if ( !TermType.VarType.canAssignTo( getVar().getType().getType(),
 					getExpression().getType( scope ).getType() ) ) {
@@ -44,15 +44,15 @@ public class ArrayItemAssignmentExpression extends AssignmentExpression {
 //			result.fail( "Array must be initialized before items can be assigned." );
 //		}
 		
-		if ( result.getsuccessful() ) {
+		if ( result.getSuccessful() ) {
 			result.append( positionExpression.isValid( scope ) );
-			if ( result.getsuccessful() && !var.isArray() ) {
+			if ( result.getSuccessful() && !var.isArray() ) {
 				result.fail( "Array assignment into not array variable is not allowed" );
 			}
-			if ( result.getsuccessful()){
+			if ( result.getSuccessful()){
 					if (positionExpression.getType( scope ).getType() != TermType.VarType.INT )
 				        result.fail( "Array position assignment must be an int type" );
-                    if (result.getsuccessful() && positionExpression.getClass() == LiteralExpression.class){
+                    if (result.getSuccessful() && positionExpression.getClass() == LiteralExpression.class){
                         if (((LiteralExpression)positionExpression).isPositive() == PositiveEnum.NEGATIVE){
                             result.fail("Array item position must be a positive number");
                         }

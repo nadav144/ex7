@@ -68,7 +68,7 @@ public class Parser {
 		preprocessResult.append( preProcessMethods( content, mainScope ) );
 		
 		preprocessResult.append( processGlobalVariables( mainScope, content ) );
-		if ( !preprocessResult.getsuccessful() ) {
+		if ( !preprocessResult.getSuccessful() ) {
 			return preprocessResult;
 		}
 		
@@ -144,7 +144,7 @@ public class Parser {
 					new VariableDeclarationCommand( typestring, res.group( 3 ),
 							res.group( 4 ) );
 			validation.append( cmd.isValid( mainScope ) );
-			if ( validation.getsuccessful() ) {
+			if ( validation.getSuccessful() ) {
 				cmd.updateScope( mainScope );
 			}
 			else {
@@ -176,7 +176,7 @@ public class Parser {
 			// Generate the right command for this line.
 			Command command = CommandFactory.CreateCommand( line, scope );
 			returnValue.append( command.isValid( scope ) );
-			if ( !returnValue.getsuccessful() )
+			if ( !returnValue.getSuccessful() )
 				return returnValue;
 			
 			if ( command.isScope() ) {
@@ -192,14 +192,14 @@ public class Parser {
 				command.updateScope( scope );
 			}
 			
-			if ( !returnValue.getsuccessful() )
+			if ( !returnValue.getSuccessful() )
 				return returnValue;
 			
 			line = reader.readLine();
 			
 		}
 		
-		if ( scope instanceof MainScope ) {
+		if ( scope.getClass() != MainScope.class ) {
 			returnValue.fail( "Expected }" );
 		}
 		

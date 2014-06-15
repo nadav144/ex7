@@ -17,7 +17,7 @@ public class ValidationResult {
 	/**
 	 * @return the successful
 	 */
-	public Boolean getsuccessful() {
+	public Boolean getSuccessful() {
 		return successful;
 	}
 	
@@ -34,7 +34,7 @@ public class ValidationResult {
 	}
 	
 	public void append( ValidationResult result ) {
-		setSuccessful( getsuccessful() && result.getsuccessful() );
+		setSuccessful( getSuccessful() && result.getSuccessful() );
 		builder.append( result.getBuilder().toString() );
 	}
 	

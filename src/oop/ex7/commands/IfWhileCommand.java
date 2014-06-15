@@ -34,7 +34,7 @@ public class IfWhileCommand implements Command {
 		ValidationResult res = new ValidationResult();
 		res.append( booleanExpresion.isValid( scope ) );
 		TermType booleanType = new TermType( VarType.BOOLEAN );
-		if ( res.getsuccessful()
+		if ( res.getSuccessful()
 				&& !booleanExpresion.getType( scope ).equals( booleanType ) )
 			res.fail( "IF or While statement expression is not a valid boolean expression" );
 		

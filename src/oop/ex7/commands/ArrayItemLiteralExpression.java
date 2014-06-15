@@ -25,7 +25,7 @@ public class ArrayItemLiteralExpression extends VariableLiteralExpression {
 		result.append( position.isValid( scope ) );
 		Variable var = scope.getVar( getName() );
 		
-		if ( result.getsuccessful() ) {
+		if ( result.getSuccessful() ) {
 			if ( !var.isArray() ) {
 				result.fail( "Array assignment into not array variable is not allowed" );
 			}

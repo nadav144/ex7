@@ -68,7 +68,7 @@ public class OperationExpression implements Expression {
 		result.append( getLhs().isValid( scope ) );
 		result.append( getRhs().isValid( scope ) );
 		
-		if ( result.getsuccessful() ) {
+		if ( result.getSuccessful() ) {
 			TermType lType = getLhs().getType( scope );
 			TermType rType = getRhs().getType( scope );
 			if ( !TermType.isArithmetic( lType )
