@@ -7,11 +7,22 @@ import oop.ex7.common.Scope;
 import oop.ex7.common.TermType;
 import oop.ex7.common.ValidationResult;
 
+/**
+ * Represent a math operation expression between two other expressions
+ */
 public class OperationExpression implements Expression {
-	
+
+    /**
+     * Operations types
+     */
 	private enum OperationType {
 		PLUS, MINUS, MULT, DIV;
-		
+
+        /**
+         * Parse operation from string content
+         * @param type string operation type of length 1
+         * @return new operation Type instance
+         */
 		public static OperationType parse( String type ) {
 			if ( type == null || type.length() != 1 ) {
 				return null;
@@ -31,14 +42,24 @@ public class OperationExpression implements Expression {
 			}
 		}
 	}
-	
+
+    // Original Strings
 	private String lhsString;
 	private String rhsString;
 	private String opString;
+
+    // Expressions
 	private OperationType opType;
 	private Expression lhs;
 	private Expression rhs;
-	
+
+    /**
+     * Initialize a new instance of OperationExpression
+     * @param lhs left hand side expression
+     * @param type math operation type
+     * @param rhs right hand side expression
+     * @throws ExpressionSyntaxException if any param is invalid
+     */
 	public OperationExpression( String lhs, String type, String rhs )
 			throws ExpressionSyntaxException {
 		this.lhsString = lhs.trim();
@@ -97,7 +118,7 @@ public class OperationExpression implements Expression {
 	
 	@Override
 	public void updateScope( Scope scope ) {
-		
+		// nothing to do here
 	}
 	
 	/*
@@ -111,15 +132,6 @@ public class OperationExpression implements Expression {
 		TermType rType = getRhs().getType( scope );
 		
 		return TermType.getCommon( new TermType[] { lType, rType } );
-		// if ( VarType.INT.equals( lType ) && VarType.INT.equals( rType ) ) {
-		// return VarType.INT;
-		//
-		// }
-		//
-		// else {
-		// return VarType.DOUBLE;
-		// }
-		// TODO: remove comment
 	}
 	
 	/**

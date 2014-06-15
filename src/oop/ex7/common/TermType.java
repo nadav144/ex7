@@ -4,11 +4,25 @@ package oop.ex7.common;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represent a type of terms in the program. the type can be used for return value, or for paramerter and variable
+ * declarations.
+ *
+ */
 public class TermType {
-	
+
+    /**
+     * Basic var types available in the compiler
+     */
 	public enum VarType {
 		INT, DOUBLE, STRING, CHAR, BOOLEAN, VOID, ANY;
-		
+
+        /**
+         * Parse var type
+         * @param source string source value
+         * @return var type
+         * @throws IllegalArgumentException on parsing error
+         */
 		public static VarType parse( String source ) throws IllegalArgumentException {
 			for ( VarType type : VarType.values() ) {
 				if ( type.toString().equalsIgnoreCase( source ) ) {
@@ -19,7 +33,13 @@ public class TermType {
 			
 			throw new IllegalArgumentException( "Type is not valid:" + source );
 		}
-		
+
+        /**
+         * Check if the param can be assigned by a diffrent type
+         * @param lhs left hand side
+         * @param rhs right hand side
+         * @return True if left hand side can be assigned by right hand side type. False otherwise.
+         */
 		public static boolean canAssignTo( VarType lhs, VarType rhs ) {
 			if ( ANY.equals( rhs ) ) {
 				return true;
@@ -44,11 +64,20 @@ public class TermType {
 	
 	private VarType type;
 	private boolean isArray;
-	
+
+    /**
+     * Initialize a new instance of non array TermType
+     * @param type type strint rep.
+     */
 	public TermType( VarType type ) {
 		this( type, false );
 	}
-	
+
+    /**
+     * Initialize a new instance of TermType
+     * @param type type strint represenation
+     * @param isArray True if the termType is array.
+     */
 	public TermType( VarType type, boolean isArray ) {
 		this.type = type;
 		this.isArray = isArray;
@@ -78,7 +107,13 @@ public class TermType {
 		}
 		return false;
 	}
-	
+
+    /**
+     * Parase the term Type from string content
+     * @param source string source value
+     * @return TermType matches the content
+     * @throws IllegalArgumentException if parsing fails
+     */
 	public static TermType parse( String source ) throws IllegalArgumentException {
 		TermType result = null;
 		if ( source != null ) {
@@ -96,7 +131,14 @@ public class TermType {
 		
 		return result;
 	}
-	
+
+    /**
+     * Get the common term type for a list of term.
+     * this will return the main term type, that can cast all.
+     * used mainly for arrays assignment
+     * @param terms array of term types
+     * @return the commomn term type
+     */
 	public static TermType getCommon( TermType[] terms ) {
 		Set< TermType > distinctTerms = new HashSet< TermType >();
 		for ( TermType term : terms ) {
@@ -134,7 +176,13 @@ public class TermType {
 			return result;
 		}
 	}
-	
+
+    /**
+     * Check if type can be assigned to another type
+     * @param lhs left hand side type
+     * @param rhs right hand side type
+     * @return True if left hand side cab be assigned by the right hand side type
+     */
 	public static boolean canAssignTo( TermType lhs, TermType rhs ) {
 		if ( lhs.isArray() != rhs.isArray() ) {
 			return false;

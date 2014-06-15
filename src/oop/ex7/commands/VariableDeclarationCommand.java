@@ -7,18 +7,31 @@ import oop.ex7.common.ValidationResult;
 import oop.ex7.common.Variable;
 
 /**
- * Created by Nadav on 10/06/14.
- */
+ * Represents a Variable Decleration command
+ * */
 public class VariableDeclarationCommand implements Command {
 	
 	private Variable var;
 	private AssignmentExpression assign;
-	
+
+    /**
+     * Initialize a new instance of VariableDeclarationCommand
+     * @param type type of variable
+     * @param name name of variable to declare
+     * @throws Exception if type is invalid
+     */
 	public VariableDeclarationCommand( String type, String name )
 			throws Exception {
 		this( type, name, null );
 	}
-	
+
+    /**
+     * Initialize a new instance of VariableDeclarationCommand
+     * @param type type of variable
+     * @param name name of variable to declare
+     * @param rhs expression to assign to the variable
+     * @throws Exception if type is invalid
+     */
 	public VariableDeclarationCommand( String type, String name, String rhs )
 			throws Exception {
 		var = new Variable( type, name );
