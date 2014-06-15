@@ -1,8 +1,8 @@
 package oop.ex7.commands;
 
-import oop.ex7.ValidationResult;
 import oop.ex7.common.Command;
 import oop.ex7.common.Scope;
+import oop.ex7.common.ValidationResult;
 
 /**
  * A command that is always valid.

@@ -52,7 +52,8 @@ public class RegexUtils {
 	/**
 	 * group 1 - type, group 2 - name
 	 */
-	public static final String PARAM_PATTERN = "^\\s*(\\w*)\\s*(\\[\\])?\\s*(\\w*)\\s*$";
+	public static final String PARAM_PATTERN =
+			"^\\s*(\\w*)\\s*(\\[\\])?\\s*(\\w*)\\s*$";
 	public static final String METHOD_NAME_PATTERN = "\\s*([a-zA-Z]\\w*)\\s*";
 	public static final String VARIABLE_NAME_PATTERN =
 			"\\s*(_?[a-zA-Z]\\w*)\\s*";
@@ -83,7 +84,7 @@ public class RegexUtils {
 	 * group 1 - double
 	 */
 	public static final String DOUBLE_LITERAL_PATTERN =
-                "^\\s*(-?\\s*\\d+\\.?\\d*)\\s*$";
+			"^\\s*(-?\\s*\\d+\\.?\\d*)\\s*$";
 	/**
 	 * group 1 - int value
 	 */
@@ -99,4 +100,8 @@ public class RegexUtils {
 	
 	public static final String ARRAY_ASSIGNMENT_LITERAL =
 			"^\\s*\\{\\s*(.*)\\s*\\}\\s*$";
+	public static final String COMMENT_INDICATOR = "//";
+	public static final String LINE_ENDING_PATTERN = ".*[{|}|;]$";
+	public static final String ENTIRE_METHOD_PATTERN =
+			"\\s*\\w+\\s+\\w+\\s*\\(.*\\)\\s*\\{(.|\\n|\\r)*(return)(.|\\n|\\r)*\\}";
 }

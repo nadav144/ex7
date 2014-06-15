@@ -1,10 +1,10 @@
 
 package oop.ex7.commands;
 
-import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
 import oop.ex7.common.TermType;
+import oop.ex7.common.ValidationResult;
 
 public class OperationExpression implements Expression {
 	

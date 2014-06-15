@@ -1,5 +1,5 @@
 
-package oop.ex7;
+package oop.ex7.common;
 
 /**
  * Created by Nadav on 10/06/14.
@@ -20,10 +20,10 @@ public class ValidationResult {
 	public Boolean getsuccessful() {
 		return successful;
 	}
-
-    public String getMessages(){
-        return builder.toString();
-    }
+	
+	public String getMessages() {
+		return builder.toString();
+	}
 	
 	/**
 	 * @param successfull
@@ -37,11 +37,16 @@ public class ValidationResult {
 		setSuccessful( getsuccessful() && result.getsuccessful() );
 		builder.append( result.getBuilder().toString() );
 	}
-
-    public void fail(String message){
-        setSuccessful(false);
-        append(message);
-    }
+	
+	public void fail( String message ) {
+		setSuccessful( false );
+		append( message );
+	}
+	
+	public void fail( Exception e ) {
+		setSuccessful( false );
+		append( e.getMessage() );
+	}
 	
 	/**
 	 * @return the builder

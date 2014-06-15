@@ -3,13 +3,10 @@ package oop.ex7.commands;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
-import oop.ex7.ValidationResult;
-import oop.ex7.common.Expression;
-import oop.ex7.common.RegexUtils;
-import oop.ex7.common.TermType;
+import oop.ex7.common.*;
 
 public class ExpressionFactory {
-	
+	public static final String UNKOWN_EXPRESSION_FORMAT_ERROR = "Unkown expression format: '%s'";
 	private static ExpressionFactory instance;
 	
 	private ExpressionFactory() {
@@ -110,7 +107,7 @@ public class ExpressionFactory {
 			return new NegatedVariableLiteralExpression( result.group( 1 ) );
 		}
 		
-		throw new Exception();
+		throw new IllegalStateException(String.format( UNKOWN_EXPRESSION_FORMAT_ERROR, expression ));
 	}
 		
 }

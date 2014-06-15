@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import oop.ex7.ValidationResult;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
 import oop.ex7.common.TermType;
+import oop.ex7.common.ValidationResult;
 
 public class ArrayLiteralExpression implements Expression {
 	

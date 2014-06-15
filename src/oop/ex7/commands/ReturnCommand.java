@@ -1,11 +1,11 @@
 
 package oop.ex7.commands;
 
-import oop.ex7.ValidationResult;
 import oop.ex7.common.Command;
 import oop.ex7.common.Expression;
 import oop.ex7.common.Scope;
 import oop.ex7.common.TermType;
+import oop.ex7.common.ValidationResult;
 
 /**
  * Created by Nadav on 13/06/14.

@@ -1,7 +1,6 @@
 
 package oop.ex7.commands;
 
-import oop.ex7.ValidationResult;
 import oop.ex7.common.*;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +15,7 @@ public class MethodDeclaration implements Command {
 	private String[] declaration;
 	private int numOfParams;
 	
-	public MethodDeclaration( MatchResult declaration ) throws Exception{
+	public MethodDeclaration( MatchResult declaration ) throws IllegalArgumentException{
 		this.declaration = new String[3];
 		
 		this.declaration[0] = (declaration.group(2) == null) ? declaration.group( 1 ) : declaration.group(1)

@@ -1,9 +1,9 @@
 package oop.ex7.commands;
 
-import oop.ex7.ValidationResult;
 import oop.ex7.common.Command;
 import oop.ex7.common.MainScope;
 import oop.ex7.common.Scope;
+import oop.ex7.common.ValidationResult;
 
 /**
  * Created by Nadav on 11/06/14.

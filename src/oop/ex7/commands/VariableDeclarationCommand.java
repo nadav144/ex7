@@ -1,10 +1,9 @@
 
 package oop.ex7.commands;
 
-import java.util.HashMap;
-import oop.ex7.ValidationResult;
 import oop.ex7.common.Command;
 import oop.ex7.common.Scope;
+import oop.ex7.common.ValidationResult;
 import oop.ex7.common.Variable;
 
 /**

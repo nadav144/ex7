@@ -4,7 +4,6 @@
 
 package oop.ex7.common;
 
-import oop.ex7.ValidationResult;
 
 /**
  * @author Jirsch
@@ -18,7 +17,7 @@ public class Variable implements Command {
 	private String name;
 	private boolean inited;
 	
-	public Variable( String type, String name ) throws Exception{
+	public Variable( String type, String name ) throws IllegalArgumentException{
 		
 		typeString = type;
 		

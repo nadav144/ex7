@@ -1,7 +1,6 @@
 
 package oop.ex7.commands;
 
-import oop.ex7.ValidationResult;
 import oop.ex7.common.*;
 
 /**

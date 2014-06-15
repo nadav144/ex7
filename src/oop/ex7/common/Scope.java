@@ -2,16 +2,13 @@
 package oop.ex7.common;
 
 import oop.ex7.commands.MethodDeclaration;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Nadav on 10/06/14.
  */
 public class Scope {
 	
-	private List< Scope > subScopes;
 	private HashMap< String, Variable > vars;
 	private TermType returnType;
 	private boolean returnedValue;
@@ -19,7 +16,6 @@ public class Scope {
 	private Scope parentScope;
 	
 	public Scope() {
-		subScopes = new ArrayList< Scope >();
 		vars = new HashMap< String, Variable >();
 		returnType = null;
 		returnedValue = false;
