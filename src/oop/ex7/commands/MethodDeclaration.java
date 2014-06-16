@@ -36,8 +36,8 @@ public class MethodDeclaration implements Command {
 					RegexUtils.Match( RegexUtils.PARAM_PATTERN, params );
 			for ( MatchResult result : matchResults ) {
 				
-				this.params.add( new Variable( (result.group(2) == null) ? result.group( 1 ) : result.group(1) + result.group(2),
-						result.group( 3 ) ) );
+				this.params.add( new Variable( (result.group(2) == null) ? result.group( 1 ) :
+                        result.group(1) + result.group(2), result.group( 3 ) ) );
 			}
 		}
 		else {

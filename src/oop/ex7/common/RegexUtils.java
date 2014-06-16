@@ -72,6 +72,8 @@ public class RegexUtils {
     //**********************
 
 
+    public static final String END_OF_SCOPE_PATTERN = "}";
+
 	/**
 	 * group 1 - type, group 2 - name
 	 */

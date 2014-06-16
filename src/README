@@ -5,9 +5,9 @@ OO Design:
 ----------
 Our design is as follows:
 Our basic building blocks are two interfaces - Command and Expression.
-An Expression is everything that can be classified as a right-hand side operand,
-it can be a single literal (e.g. 5, 'f', b) or a complex argument containing
-operations and method invocations.
+An Expression is everything that can be classified as a right-hand side operand
+or an array position assignment, it can be a single literal (e.g. 5, 'f', b) or
+a complex argument containing operations and method invocations.
 A Command is a representation of a single line of code. It could be a
 declaration, assignment or whatever. It may be composed of expression if needed.
 

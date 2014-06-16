@@ -95,7 +95,7 @@ public class CommandFactory {
 			return new ReturnCommand( res.group( 1 ) );
 		}
 		// End of scope command
-		else if ( commandstr.equals( "}" ) ) {
+		else if ( commandstr.equals( RegexUtils.END_OF_SCOPE_PATTERN ) ) {
 			return new EndOFScopeCommand();
 		}
 		

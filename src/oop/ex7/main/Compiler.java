@@ -2,6 +2,7 @@
 package oop.ex7.main;
 
 import oop.ex7.Exceptions.CommandSyntaxException;
+import oop.ex7.Exceptions.ExpressionSyntaxException;
 import oop.ex7.commands.CommandFactory;
 import oop.ex7.commands.EndOFScopeCommand;
 import oop.ex7.commands.MethodDeclaration;
@@ -171,7 +172,7 @@ public class Compiler {
 			Scope scope ) throws Exception {
 		
 		ValidationResult returnValue = new ValidationResult();
-		
+		try {
 		String line = reader.readLine();
 		while ( line != null ) {
 			
@@ -204,6 +205,14 @@ public class Compiler {
 		if ( scope.getClass() != MainScope.class ) {
 			returnValue.fail( "Expected }" );
 		}
+        } catch (CommandSyntaxException ex){
+            returnValue.fail(ex.getMessage());
+        } catch (ExpressionSyntaxException ex){
+            returnValue.fail(ex.getMessage());
+        } catch (Exception ex){
+            throw ex;
+        }
+
 		
 		return returnValue;
 	}
